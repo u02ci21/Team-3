@@ -1,0 +1,180 @@
+//back end
+const mysql = require('mysql2');
+
+//create a new MySQL connection using the mysql2 package
+const connection = mysql.createConnection({
+    host: 'localhost', 
+    user: 'root',
+    password: 'Charlie321@',
+    database: 'game_db' });
+
+//connect to the database
+connection.connect((error) => {
+    if (error) {
+        console.error('Error connecting to the database:', error);
+    } else {
+        console.log('Connected to the MySQL database.');
+    }
+});
+
+
+
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config() //loading environment variables from a .env file into process.env 
+}
+
+// importing libraries that we installed using npm
+const express = require('express')
+const app = express()
+app.set('view engine', 'ejs')
+const bcrypt = require('bcrypt') // importing bcrypt package
+const passport = require('passport')
+const initializePassport = require('./passport-config')
+const flash = require('express-flash')
+const session = require('express-session')
+const methodOverride = require('method-override')
+
+
+initializePassport(
+    passport, 
+
+    (email,done) => { // checking for the email we get from the user and comparing to the one in the database making sure its the same
+        connection.query('SELECT * FROM users WHERE email = ?', [email], (error, results) => { //query to get user by email
+            if (error) {
+                return done(error);
+            }
+            if (results.length === 0) {
+                return done(null, false); // No user found with that email
+            }
+            return done(null, results[0]);
+        }); 
+    },
+
+    (id, done) => {
+        connection.query('SELECT * FROM users WHERE id = ?', [id], (error, results) => { //query to get user by id
+            if (error) {
+                return done(error);
+            }
+            if (results.length === 0) {
+                return done(null, false); // No user found with that id
+            }
+            return done(null, results[0]);
+        });
+    })
+ 
+
+app.use(express.urlencoded({ extended: false }))
+app.use(flash())
+app.use(session({
+    secret: process.env.SECRET_KEY,
+    resave: false, //dont save session if nothing is changed
+    saveUninitialized: false //dont create session until something is stored
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(methodOverride('_method'))
+
+
+app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true //to display error messages (like no user found with that email)
+}
+))
+
+
+// configuring the register route to add new users 
+app.post('/register',  checkNotAuthenticated, async (req, res) => {
+    const {email, password, age} = req.body;
+
+    //hash the password
+    bcrypt.hash(password, 10, (error, hashedPassword) => {
+        if (error) {
+            console.error('Error hashing password:', error);
+            return res.redirect('/register');
+        }
+
+        // Insert the new user into the database
+        const query = 'INSERT INTO users (email, password, age) VALUES (?, ?, ?)';
+        connection.query(query, [email, hashedPassword, age], (error, results) => {
+            if (error) {
+                if (error.code === 'ER_DUP_ENTRY') {
+                    console.error('Error: Email already in use.');                    
+                } else {
+                    console.error('Error inserting user into database:', error);
+                }
+                return res.redirect('/register');        
+            }
+
+            console.log('New user registered:', results);
+            res.redirect('/login'); // Redirect to login page after successful registration
+        });
+    });
+
+
+    try {
+        const hashedPassword = await bcrypt.hash(req.body.password) //hashing the password
+        users.push({
+            id: Date.now().toString(), //generating a unique id since there can be 2 people with the same name
+            name: req.body.name,
+            email: req.body.email,
+            password: hashedPassword //storing the hashed password
+        })
+        console.log(users); //Displaying newly registered users in the console for testing purposes
+        res.redirect('/login') //redirecting to login page after registering
+    } catch (e) {
+        console.log(e);
+        res.redirect('/register')
+        
+    }
+    })
+    
+
+// Routes 
+app.get('/', checkAuthenticated, (req, res) => {
+    res.render('index.ejs', {name: req.user.name})
+})
+
+app.get('/login', checkNotAuthenticated, (req, res) => {
+    res.render('login.ejs')
+})
+
+app.get('/register', checkNotAuthenticated, (req, res) => {
+    res.render('register.ejs')
+})
+//End Routes
+
+app.delete('/logout', (req, res) => {
+    req.logOut(req.user, err => {
+        if (err) {
+            return next(err)
+            res.redirect('/login')   
+        }
+    })
+    
+})
+
+
+function checkAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next()
+    }
+    res.redirect('/login')
+}
+
+function checkNotAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return res.redirect('/')
+    }
+    next() 
+}
+
+//close the MySQL connection 
+connection.end 
+
+
+app.listen(3000)
+
+
+ 
