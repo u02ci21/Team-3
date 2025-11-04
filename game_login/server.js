@@ -111,23 +111,6 @@ app.post('/register',  checkNotAuthenticated, async (req, res) => {
             res.redirect('/login'); // Redirect to login page after successful registration
         });
     });
-
-
-    try {
-        const hashedPassword = await bcrypt.hash(req.body.password) //hashing the password
-        users.push({
-            id: Date.now().toString(), //generating a unique id since there can be 2 people with the same name
-            name: req.body.name,
-            email: req.body.email,
-            password: hashedPassword //storing the hashed password
-        })
-        console.log(users); //Displaying newly registered users in the console for testing purposes
-        res.redirect('/login') //redirecting to login page after registering
-    } catch (e) {
-        console.log(e);
-        res.redirect('/register')
-        
-    }
     })
     
 
@@ -145,7 +128,7 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 })
 //End Routes
 
-app.delete('/logout', (req, res) => {
+app.delete('/logout', (req, res, next) => {
     req.logOut(req.user, err => {
         if (err) {
             return next(err)
@@ -171,7 +154,7 @@ function checkNotAuthenticated(req, res, next) {
 }
 
 //close the MySQL connection 
-connection.end 
+connection.end();
 
 
 app.listen(3000)
