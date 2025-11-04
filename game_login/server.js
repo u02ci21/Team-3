@@ -38,26 +38,23 @@ const methodOverride = require('method-override')
 initializePassport(
     passport, 
 
-    (email,done) => { // checking for the email we get from the user and comparing to the one in the database making sure its the same
-        connection.query('SELECT * FROM users WHERE email = ?', [email], (error, results) => { //query to get user by email
-            if (error) {
+    // getUserByEmail
+    (email, done) => {
+        connection.query('SELECT * FROM users WHERE email = ?', [email], (error, results) => {
+            if (error) 
                 return done(error);
-            }
-            if (results.length === 0) {
-                return done(null, false); // No user found with that email
-            }
+            if (results.length === 0) 
+                return done(null, false, { message: 'No user found' });
             return done(null, results[0]);
-        }); 
+        });
     },
-
+    // getUserById
     (id, done) => {
-        connection.query('SELECT * FROM users WHERE id = ?', [id], (error, results) => { //query to get user by id
-            if (error) {
+        connection.query('SELECT * FROM users WHERE id = ?', [id], (error, results) => {
+            if (error) 
                 return done(error);
-            }
-            if (results.length === 0) {
-                return done(null, false); // No user found with that id
-            }
+            if (results.length === 0) 
+                return done(null, false);
             return done(null, results[0]);
         });
     })
@@ -129,9 +126,9 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 //End Routes
 
 app.delete('/logout', (req, res, next) => {
-    req.logOut(req.user, err => {
-        if (err) {
-            return next(err)
+    req.logOut(req.user, error => {
+        if (error) {
+            return next(error)
             res.redirect('/login')   
         }
     })
