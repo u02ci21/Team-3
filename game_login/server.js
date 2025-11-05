@@ -44,7 +44,7 @@ initializePassport(
             if (error) 
                 return done(error);
             if (results.length === 0) 
-                return done(null, false, { message: 'No user found' });
+                return done(null, null);
             return done(null, results[0]);
         });
     },
@@ -54,7 +54,7 @@ initializePassport(
             if (error) 
                 return done(error);
             if (results.length === 0) 
-                return done(null, false);
+                return done(null, null);
             return done(null, results[0]);
         });
     })
@@ -83,7 +83,7 @@ app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
 
 // configuring the register route to add new users 
 app.post('/register',  checkNotAuthenticated, async (req, res) => {
-    const {email, password, age} = req.body;
+    const {username,email, password} = req.body;
 
     //hash the password
     bcrypt.hash(password, 10, (error, hashedPassword) => {
@@ -93,15 +93,16 @@ app.post('/register',  checkNotAuthenticated, async (req, res) => {
         }
 
         // Insert the new user into the database
-        const query = 'INSERT INTO users (email, password, age) VALUES (?, ?, ?)';
-        connection.query(query, [email, hashedPassword, age], (error, results) => {
+        const query = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
+        connection.query(query, [username, email, hashedPassword], (error, results) => {
             if (error) {
                 if (error.code === 'ER_DUP_ENTRY') {
                     console.error('Error: Email already in use.');                    
                 } else {
                     console.error('Error inserting user into database:', error);
                 }
-                return res.redirect('/register');        
+                console.log('New user registered', results);
+                return res.redirect('/login');        
             }
 
             console.log('New user registered:', results);
@@ -151,7 +152,7 @@ function checkNotAuthenticated(req, res, next) {
 }
 
 //close the MySQL connection 
-connection.end();
+// connection.end();
 
 
 app.listen(3000)
