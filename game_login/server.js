@@ -101,8 +101,8 @@ app.post('/register',  checkNotAuthenticated, async (req, res) => {
                 } else {
                     console.error('Error inserting user into database:', error);
                 }
-                console.log('New user registered', results);
-                return res.redirect('/login');        
+                console.log('Unsuccessful registration', results);
+                return res.redirect('/register');        
             }
 
             console.log('New user registered:', results);
