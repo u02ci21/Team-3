@@ -18,6 +18,23 @@
       gap: 10px;
     }
 
+    #hud {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      color: #000;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 18px;
+      z-index: 1000;
+    }
+
+
+
+
+    
     #gameWrapper {
       display: flex;
       align-items: center;
@@ -89,6 +106,12 @@
   </style>
 </head>
 <body>
+
+
+  <div id="hud">
+    <div id="tokenDisplay">Tokens: 0</div>
+  </div>
+  
   <div id="gameWrapper">
     <div id="gameContainer"></div>
     <div id="dustbin">BIN</div>
@@ -98,6 +121,10 @@
   <div id="timer">Time Left: 10</div>
   <div id="message"></div>
 
+
+
+  <script src="tokens.js"></script> 
+  
   <script>
     const gameContainer = document.getElementById("gameContainer");
     const dustbin = document.getElementById("dustbin");
@@ -259,6 +286,7 @@ function updateStreamColor() {
       if (won) {
         collected = trashCount;
         updateStreamColor();
+        addTokens(5); //tokens added for winning
       }
     }
 
@@ -273,12 +301,16 @@ function updateStreamColor() {
       requestAnimationFrame(floatTrash);
     });
 
+    window.addEventListener("DOMContentLoaded", () => {
+      if (typeof updateDisplay === "function") updateDisplay(); 
+    });
   
     spawnTrash();
     updateStreamColor();
   </script>
 </body>
 </html>
+
 
 
 
