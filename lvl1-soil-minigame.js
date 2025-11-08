@@ -41,16 +41,9 @@ class Soil {
     }
 
     grow() {
-        if (this.condition !== 'growing')
-            return;
-
-        this.condition = 'grown';
         //maybe call a function that allows the image to change on phaser? 
         return 'Plants have grown! You can now harvest them.';
     }
     
-
-
-
 }
 
