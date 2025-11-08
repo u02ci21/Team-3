@@ -43,7 +43,7 @@ class Soil {
     grow() {
         //maybe call a function that allows the image to change on phaser? 
         return 'Plants have grown! You can now harvest them.';
-    }
-    
+    } 
 }
+
 
