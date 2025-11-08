@@ -28,6 +28,29 @@ class Soil {
         return 'Seeds have been planted. Wait for them to grow.';
     }
 
+    water(tools) {
+        if (tools !== 'watering can')
+            return 'You need a watering can to water the plants.';
+
+        if (this.condition !== 'planted')
+            return 'You can only water after planting seeds.';
+
+        this.condition = 'growing';
+        setTimeout(grow, 10000); // wait 10 seconds for the plant to grow
+        return 'Plants are growing. Please wait.';
+    }
+
+    grow() {
+        if (this.condition !== 'growing')
+            return;
+
+        this.condition = 'grown';
+        //maybe call a function that allows the image to change on phaser? 
+        return 'Plants have grown! You can now harvest them.';
+    }
+    
+
+
 
 }
 
