@@ -97,7 +97,10 @@ class CharacterSelect extends Phaser.Scene {
           .setStrokeStyle(4, 0x00ff99)
           .setOrigin(0.5);
 
+        console.log('CharacterSelect: Selected character =', ch.name);
+
         this.time.delayedCall(300, () => {
+          console.log('CharacterSelect: Starting Level1 with character =', ch.name);
           this.scene.start('Level1', { character: ch.name });
         });
       });
@@ -113,10 +116,14 @@ class Level1 extends Phaser.Scene {
   }
 
   init(data) {
+    console.log('Level1 init: Received data =', data);
     this.character = data.character;
+    console.log('Level1 init: this.character =', this.character);
   }
 
   create() {
+    console.log('Level1 create: this.character =', this.character);
+
     this.add.text(this.scale.width / 2, this.scale.height / 2 - 20, `Welcome, ${this.character}!`, {
       fontSize: '36px',
       color: '#fff'
@@ -128,7 +135,8 @@ class Level1 extends Phaser.Scene {
     }).setOrigin(0.5);
 
     this.time.delayedCall(2000, () => {
-      this.scene.start('HarmonyGarden');
+      console.log('Level1: Starting HarmonyGarden with character =', this.character);
+      this.scene.start('HarmonyGarden', { character: this.character });
     });
   }
 }
