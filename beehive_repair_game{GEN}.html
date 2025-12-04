@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beehive Repair Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(255, 255, 255, 0.8) 0%, transparent 30%),
+                radial-gradient(ellipse at 60% 85%, rgba(255, 255, 255, 0.6) 0%, transparent 25%),
+                radial-gradient(ellipse at 85% 75%, rgba(255, 255, 255, 0.7) 0%, transparent 28%),
+                linear-gradient(to bottom, 
+                    #87CEEB 0%, 
+                    #98D8E8 40%, 
+                    #90EE90 70%, 
+                    #76C776 85%,
+                    #5AB55A 100%
+                );
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    #2d5016 0px,
+                    #3a6b1f 3px,
+                    #2d5016 6px
+                );
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        body::after {
+            content: '☁️';
+            position: absolute;
+            top: 10%;
+            right: 15%;
+            font-size: 80px;
+            opacity: 0.7;
+            animation: cloudFloat 30s infinite linear;
+            z-index: 1;
+        }
+
+        @keyframes cloudFloat {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100vw);
+            }
+        }
+
+        .game-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.15), transparent 60%),
+                radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.1), transparent 50%),
+                linear-gradient(135deg, rgba(144, 238, 144, 0.3) 0%, rgba(60, 179, 113, 0.3) 100%);
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            z-index: 10;
+        }
+
+        .title {
+            text-align: center;
+            color: #8B4513;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-shadow: 
+                3px 3px 0px #654321,
+                4px 4px 8px rgba(0,0,0,0.4),
+                0 0 20px rgba(255, 215, 0, 0.3);
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+            letter-spacing: 2px;
+        }
+
+        .beehive {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 350px;
+            z-index: 10;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            animation: hiveEntrance 1s ease-out;
+        }
+
+        @keyframes hiveEntrance {
+            from {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .hive-body {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hive-section {
+            position: absolute;
+            background: linear-gradient(135deg, #F4A460 0%, #DAA520 50%, #CD853F 100%);
+            border: 4px solid #8B4513;
+            border-radius: 15px;
+            box-shadow: 
+                inset 0 4px 8px rgba(255, 255, 255, 0.3),
+                inset 0 -4px 8px rgba(0, 0, 0, 0.2),
+                0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .hive-section::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            right: 10%;
+            height: 30%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
+            border-radius: 10px;
+            pointer-events: none;
+        }
+
+        .hive-section::after {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 8px,
+                    rgba(139, 69, 19, 0.15) 8px,
+                    rgba(139, 69, 19, 0.15) 9px
+                ),
+                repeating-linear-gradient(
+                    60deg,
+                    transparent,
+                    transparent 8px,
+                    rgba(139, 69, 19, 0.15) 8px,
+                    rgba(139, 69, 19, 0.15) 9px
+                ),
+                repeating-linear-gradient(
+                    120deg,
+                    transparent,
+                    transparent 8px,
+                    rgba(139, 69, 19, 0.15) 8px,
+                    rgba(139, 69, 19, 0.15) 9px
+                );
+            border-radius: 10px;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .section-1 {
+            width: 200px;
+            height: 80px;
+            left: 50px;
+            top: 20px;
+            clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+        }
+
+        .section-2 {
+            width: 250px;
+            height: 100px;
+            left: 25px;
+            top: 90px;
+        }
+
+        .section-3 {
+            width: 250px;
+            height: 100px;
+            left: 25px;
+            top: 180px;
+        }
+
+        .section-4 {
+            width: 200px;
+            height: 80px;
+            left: 50px;
+            top: 270px;
+            clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%);
+        }
+
+        .broken-spot {
+            position: absolute;
+            background: linear-gradient(135deg, #4a2511 0%, #3d1f0f 100%);
+            border: 4px dashed #FF6347;
+            border-radius: 12px;
+            opacity: 0.9;
+            z-index: 20;
+            box-shadow: 
+                inset 0 4px 8px rgba(0, 0, 0, 0.6),
+                0 4px 12px rgba(255, 99, 71, 0.4);
+        }
+
+        .broken-spot::before {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            background: 
+                linear-gradient(45deg, transparent 48%, rgba(255,99,71,0.3) 49%, rgba(255,99,71,0.3) 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(255,99,71,0.3) 49%, rgba(255,99,71,0.3) 51%, transparent 52%);
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        .broken-spot.highlight {
+            animation: pulse 1s infinite;
+            box-shadow: 
+                inset 0 4px 8px rgba(0, 0, 0, 0.6),
+                0 0 30px rgba(255, 99, 71, 0.6),
+                0 4px 12px rgba(255, 99, 71, 0.4);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .spot-1 {
+            width: 80px;
+            height: 60px;
+            left: 60px;
+            top: 30px;
+        }
+
+        .spot-2 {
+            width: 100px;
+            height: 70px;
+            left: 150px;
+            top: 100px;
+        }
+
+        .spot-3 {
+            width: 90px;
+            height: 65px;
+            left: 30px;
+            top: 190px;
+        }
+
+        .spot-4 {
+            width: 85px;
+            height: 55px;
+            left: 110px;
+            top: 280px;
+        }
+
+        .wood-plank {
+            position: absolute;
+            background: 
+                linear-gradient(90deg, 
+                    transparent 0%, 
+                    rgba(0,0,0,0.1) 50%, 
+                    transparent 100%
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    #D2691E 0px,
+                    #CD853F 2px,
+                    #D2691E 4px,
+                    #8B4513 6px,
+                    #D2691E 8px
+                ),
+                linear-gradient(180deg, #D2691E 0%, #A0522D 100%);
+            border: 3px solid #654321;
+            border-radius: 8px;
+            cursor: grab;
+            box-shadow: 
+                inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+                0 6px 16px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2d1508;
+            font-weight: bold;
+            text-shadow: 
+                1px 1px 2px rgba(255,255,255,0.5),
+                -1px -1px 1px rgba(0,0,0,0.3);
+            z-index: 100;
+            font-size: 1.1em;
+            transition: all 0.2s;
+        }
+
+        .wood-plank::before {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border-radius: 5px;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(139, 69, 19, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 60%, rgba(139, 69, 19, 0.2) 0%, transparent 40%),
+                radial-gradient(ellipse at 40% 80%, rgba(139, 69, 19, 0.25) 0%, transparent 45%);
+            pointer-events: none;
+        }
+
+        .wood-plank:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+                0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        .wood-plank:active {
+            cursor: grabbing;
+        }
+
+        .wood-plank.dragging {
+            opacity: 0.7;
+            z-index: 1000;
+        }
+
+        .wood-plank.placed {
+            cursor: default;
+            animation: placeWood 0.3s ease;
+        }
+
+        @keyframes placeWood {
+            0% { transform: scale(1.2) rotate(5deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .plank-1 {
+            width: 80px;
+            height: 60px;
+            bottom: 50px;
+            left: 50px;
+        }
+
+        .plank-2 {
+            width: 100px;
+            height: 70px;
+            bottom: 50px;
+            left: 150px;
+        }
+
+        .plank-3 {
+            width: 90px;
+            height: 65px;
+            bottom: 50px;
+            left: 270px;
+        }
+
+        .plank-4 {
+            width: 85px;
+            height: 55px;
+            bottom: 50px;
+            left: 380px;
+        }
+
+        .hammer {
+            position: absolute;
+            bottom: 120px;
+            right: 80px;
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            transition: transform 0.1s;
+            z-index: 100;
+        }
+
+        .hammer:hover {
+            transform: scale(1.1);
+        }
+
+        .hammer:active {
+            transform: scale(0.95) rotate(-15deg);
+        }
+
+        .hammer-head {
+            position: absolute;
+            width: 50px;
+            height: 20px;
+            background: linear-gradient(to bottom, #A9A9A9, #696969);
+            border-radius: 2px;
+            top: 15px;
+            left: 5px;
+            box-shadow: 
+                inset 0 2px 4px rgba(255,255,255,0.3),
+                inset 0 -2px 4px rgba(0,0,0,0.4),
+                2px 2px 6px rgba(0,0,0,0.4);
+            border: 1px solid #555;
+        }
+
+        .hammer-head::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 20px;
+            background: linear-gradient(to bottom, #A9A9A9, #696969);
+            right: -8px;
+            top: 0;
+            border-radius: 0 2px 2px 0;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+        }
+
+        .hammer-head::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 20px;
+            background: linear-gradient(to bottom, #A9A9A9, #696969);
+            left: -8px;
+            top: 0;
+            border-radius: 2px 0 0 2px;
+            box-shadow: -1px 2px 6px rgba(0,0,0,0.4);
+        }
+
+        .hammer-handle {
+            position: absolute;
+            width: 12px;
+            height: 55px;
+            background: linear-gradient(to right, #A0522D, #8B4513, #6F3410);
+            border-radius: 6px;
+            top: 32px;
+            left: 23px;
+            box-shadow: 
+                inset -1px 0 2px rgba(0,0,0,0.4),
+                2px 2px 6px rgba(0,0,0,0.3);
+            border: 1px solid #5c2e0a;
+        }
+
+        .hammer-handle::before {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 8px;
+            background: #654321;
+            border-radius: 3px;
+            top: -2px;
+            left: -1px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+        }
+
+        .hammer-handle::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 6px;
+            background: #8B4513;
+            border-radius: 0 0 8px 8px;
+            bottom: -2px;
+            left: -2px;
+        }
+
+        .secured {
+            border: 4px solid #32CD32 !important;
+            box-shadow: 
+                0 0 20px rgba(50, 205, 50, 0.6),
+                0 0 40px rgba(50, 205, 50, 0.3),
+                inset 0 0 10px rgba(50, 205, 50, 0.2) !important;
+            animation: securedGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes securedGlow {
+            from {
+                box-shadow: 
+                    0 0 20px rgba(50, 205, 50, 0.6),
+                    0 0 40px rgba(50, 205, 50, 0.3),
+                    inset 0 0 10px rgba(50, 205, 50, 0.2);
+            }
+            to {
+                box-shadow: 
+                    0 0 25px rgba(50, 205, 50, 0.8),
+                    0 0 50px rgba(50, 205, 50, 0.4),
+                    inset 0 0 15px rgba(50, 205, 50, 0.3);
+            }
+        }
+
+        @keyframes hammerHit {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1) rotate(5deg); }
+            50% { transform: scale(0.95) rotate(-5deg); }
+            75% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .hammer-animation {
+            animation: hammerHit 0.3s ease;
+        }
+
+        .win-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: 
+                radial-gradient(circle at 50% 50%, #FFD700, #FFA500 70%),
+                linear-gradient(135deg, #FFD700, #FFA500);
+            padding: 40px 60px;
+            border-radius: 25px;
+            border: 6px solid #FF8C00;
+            box-shadow: 
+                0 15px 50px rgba(0,0,0,0.6),
+                inset 0 2px 10px rgba(255,255,255,0.5),
+                0 0 50px rgba(255, 215, 0, 0.8);
+            z-index: 2000;
+            text-align: center;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .win-message.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            animation: winCelebrate 1s ease-in-out;
+        }
+
+        @keyframes winCelebrate {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+            25% {
+                transform: translate(-50%, -50%) scale(1.1) rotate(2deg);
+            }
+            75% {
+                transform: translate(-50%, -50%) scale(1.05) rotate(-2deg);
+            }
+        }
+
+        .win-message h2 {
+            color: #8B4513;
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 
+                3px 3px 0px #654321,
+                5px 5px 10px rgba(0,0,0,0.3);
+            animation: textBounce 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes textBounce {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-5px);
+            }
+        }
+
+        .win-message p {
+            color: #654321;
+            font-size: 1.5em;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+        }
+
+        .bee {
+            position: absolute;
+            font-size: 35px;
+            animation: fly 3s infinite ease-in-out;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+            transform-style: preserve-3d;
+        }
+
+        .bee-1 {
+            top: 100px;
+            left: 100px;
+            animation-delay: 0s;
+        }
+
+        .bee-2 {
+            top: 150px;
+            right: 100px;
+            animation-delay: 1s;
+        }
+
+        .bee-3 {
+            top: 250px;
+            left: 150px;
+            animation-delay: 2s;
+        }
+
+        @keyframes fly {
+            0%, 100% { 
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% { 
+                transform: translate(25px, -20px) rotate(10deg);
+            }
+            50% { 
+                transform: translate(-20px, 25px) rotate(-10deg);
+            }
+            75% { 
+                transform: translate(20px, 20px) rotate(5deg);
+            }
+        }
+
+        .splash-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), transparent 50%),
+                linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            border-radius: 25px;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            box-shadow: inset 0 2px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .splash-screen.hidden {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+        }
+
+        .splash-content {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 50px 60px;
+            border-radius: 25px;
+            box-shadow: 
+                0 15px 60px rgba(0, 0, 0, 0.4),
+                inset 0 2px 10px rgba(255, 215, 0, 0.3);
+            text-align: center;
+            max-width: 550px;
+            border: 3px solid rgba(255, 140, 0, 0.5);
+            animation: contentFloat 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes contentFloat {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-10px);
+            }
+        }
+
+        .splash-content h1 {
+            color: #8B4513;
+            font-size: 3.2em;
+            margin-bottom: 15px;
+            text-shadow: 
+                3px 3px 0px #654321,
+                5px 5px 15px rgba(0,0,0,0.3),
+                0 0 30px rgba(255, 215, 0, 0.4);
+            animation: titleShine 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleShine {
+            from {
+                text-shadow: 
+                    3px 3px 0px #654321,
+                    5px 5px 15px rgba(0,0,0,0.3),
+                    0 0 30px rgba(255, 215, 0, 0.4);
+            }
+            to {
+                text-shadow: 
+                    3px 3px 0px #654321,
+                    5px 5px 15px rgba(0,0,0,0.3),
+                    0 0 40px rgba(255, 215, 0, 0.7);
+            }
+        }
+
+        .splash-content .subtitle {
+            color: #D2691E;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .splash-content .guide {
+            text-align: left;
+            margin: 20px 0;
+            background: #FFF8DC;
+            padding: 20px;
+            border-radius: 10px;
+            border: 3px solid #DAA520;
+        }
+
+        .splash-content .guide h3 {
+            color: #8B4513;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .splash-content .guide ol {
+            margin-left: 25px;
+            color: #654321;
+            font-size: 1.1em;
+        }
+
+        .splash-content .guide li {
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .start-button {
+            background: linear-gradient(135deg, #32CD32, #228B22, #1a6b1a);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.6em;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 
+                0 8px 20px rgba(0,0,0,0.4),
+                inset 0 2px 5px rgba(255,255,255,0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 25px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            animation: buttonPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% {
+                box-shadow: 
+                    0 8px 20px rgba(0,0,0,0.4),
+                    inset 0 2px 5px rgba(255,255,255,0.3),
+                    0 0 20px rgba(50, 205, 50, 0.3);
+            }
+            50% {
+                box-shadow: 
+                    0 8px 20px rgba(0,0,0,0.4),
+                    inset 0 2px 5px rgba(255,255,255,0.3),
+                    0 0 40px rgba(50, 205, 50, 0.6);
+            }
+        }
+
+        .start-button:hover {
+            transform: scale(1.08);
+            box-shadow: 
+                0 10px 25px rgba(0,0,0,0.5),
+                inset 0 2px 5px rgba(255,255,255,0.4),
+                0 0 50px rgba(50, 205, 50, 0.7);
+        }
+
+        .start-button:active {
+            transform: scale(1.02);
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #FFD700, #FFA500);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.7;
+            animation: float 8s infinite ease-in-out;
+            box-shadow: 
+                0 0 6px #FFD700,
+                0 0 12px rgba(255, 215, 0, 0.5);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-600px) translateX(50px) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 4s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 6s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 7s; }
+
+        .flower {
+            position: absolute;
+            font-size: 40px;
+            animation: sway 3s infinite ease-in-out;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+            z-index: 5;
+        }
+
+        @keyframes sway {
+            0%, 100% {
+                transform: rotate(-3deg);
+            }
+            50% {
+                transform: rotate(3deg);
+            }
+        }
+
+        .flower-1 {
+            bottom: 140px;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .flower-2 {
+            bottom: 160px;
+            left: 12%;
+            animation-delay: 0.5s;
+        }
+
+        .flower-3 {
+            bottom: 150px;
+            right: 8%;
+            animation-delay: 1s;
+        }
+
+        .flower-4 {
+            bottom: 145px;
+            right: 15%;
+            animation-delay: 1.5s;
+        }
+
+        .sun {
+            position: absolute;
+            top: 8%;
+            left: 10%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #FDB813 0%, #FFA500 70%);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 30px #FDB813,
+                0 0 60px rgba(253, 184, 19, 0.5);
+            z-index: 1;
+            animation: sunPulse 4s infinite ease-in-out;
+        }
+
+        .sun::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background: 
+                linear-gradient(0deg, transparent 45%, #FDB813 48%, transparent 52%),
+                linear-gradient(45deg, transparent 45%, #FDB813 48%, transparent 52%),
+                linear-gradient(90deg, transparent 45%, #FDB813 48%, transparent 52%),
+                linear-gradient(135deg, transparent 45%, #FDB813 48%, transparent 52%);
+            opacity: 0.6;
+            border-radius: 50%;
+        }
+
+        @keyframes sunPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 
+                    0 0 30px #FDB813,
+                    0 0 60px rgba(253, 184, 19, 0.5);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 
+                    0 0 40px #FDB813,
+                    0 0 80px rgba(253, 184, 19, 0.6);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sun"></div>
+    
+    <div class="flower flower-1">🌸</div>
+    <div class="flower flower-2">🌺</div>
+    <div class="flower flower-3">🌼</div>
+    <div class="flower flower-4">🌻</div>
+
+    <div class="game-container">
+        <div class="splash-screen" id="splashScreen">
+            <div class="splash-content">
+                <h1>🐝 Beehive Repair! 🔨</h1>
+                <p class="subtitle">Help save the bees!</p>
+                
+                <div class="guide">
+                    <h3>📋 How to Play:</h3>
+                    <ol>
+                        <li><strong>Drag wood planks</strong> from the bottom onto the broken spots on the beehive (they'll snap into place when close enough!)</li>
+                        <li><strong>Click on each plank</strong> to hammer it secure - watch it shake and turn green!</li>
+                        <li><strong>Fix all 4 spots</strong> to make the bees happy again! 🎉</li>
+                    </ol>
+                </div>
+
+                <button class="start-button" onclick="startGame()">🐝 Start Game 🔨</button>
+            </div>
+        </div>
+
+        <!-- Floating pollen particles -->
+        <div class="particle" style="bottom: 0;"></div>
+        <div class="particle" style="bottom: 0;"></div>
+        <div class="particle" style="bottom: 0;"></div>
+        <div class="particle" style="bottom: 0;"></div>
+        <div class="particle" style="bottom: 0;"></div>
+        <div class="particle" style="bottom: 0;"></div>
+        <div class="particle" style="bottom: 0;"></div>
+        <div class="particle" style="bottom: 0;"></div>
+
+        <h1 class="title">🐝 Beehive Repair! 🔨</h1>
+
+        <div class="bee bee-1">🐝</div>
+        <div class="bee bee-2">🐝</div>
+        <div class="bee bee-3">🐝</div>
+
+        <div class="beehive">
+            <div class="hive-body">
+                <div class="hive-section section-1"></div>
+                <div class="hive-section section-2"></div>
+                <div class="hive-section section-3"></div>
+                <div class="hive-section section-4"></div>
+
+                <div class="broken-spot spot-1 highlight" data-spot="1"></div>
+                <div class="broken-spot spot-2 highlight" data-spot="2"></div>
+                <div class="broken-spot spot-3 highlight" data-spot="3"></div>
+                <div class="broken-spot spot-4 highlight" data-spot="4"></div>
+            </div>
+        </div>
+
+        <div class="wood-plank plank-1" draggable="true" data-plank="1">Wood</div>
+        <div class="wood-plank plank-2" draggable="true" data-plank="2">Wood</div>
+        <div class="wood-plank plank-3" draggable="true" data-plank="3">Wood</div>
+        <div class="wood-plank plank-4" draggable="true" data-plank="4">Wood</div>
+
+        <div class="hammer" id="hammer">
+            <div class="hammer-head"></div>
+            <div class="hammer-handle"></div>
+        </div>
+
+        <div class="win-message" id="winMessage">
+            <h2>🎉 Hive Repaired! 🎉</h2>
+            <p>The bees are happy again!</p>
+            <p>🐝🐝🐝</p>
+        </div>
+    </div>
+
+    <script>
+        const gameState = {
+            placedPlanks: new Set(),
+            securedSpots: new Set(),
+            totalSpots: 4
+        };
+
+        let draggedElement = null;
+        let hammerMode = false;
+
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+        // Drag and Drop functionality
+        document.querySelectorAll('.wood-plank').forEach(plank => {
+            plank.addEventListener('dragstart', handleDragStart);
+            plank.addEventListener('dragend', handleDragEnd);
+            plank.addEventListener('drag', function(e) {
+                if (e.clientX !== 0 && e.clientY !== 0) {
+                    checkProximityAndSnap(this, e.clientX, e.clientY);
+                }
+            });
+        });
+
+        document.querySelectorAll('.broken-spot').forEach(spot => {
+            spot.addEventListener('dragover', handleDragOver);
+            spot.addEventListener('drop', handleDrop);
+        });
+
+        function handleDragStart(e) {
+            if (this.classList.contains('placed')) return;
+            draggedElement = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+            
+            // Reset all spot highlights
+            document.querySelectorAll('.broken-spot').forEach(spot => {
+                spot.style.transform = '';
+                spot.style.boxShadow = '';
+            });
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            
+            // Check proximity for snap effect
+            if (draggedElement) {
+                const plankNum = draggedElement.dataset.plank;
+                const spotNum = this.dataset.spot;
+                
+                if (plankNum === spotNum && !gameState.placedPlanks.has(spotNum)) {
+                    this.style.transform = 'scale(1.1)';
+                    this.style.boxShadow = '0 0 25px #FFD700';
+                }
+            }
+            
+            return false;
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+
+            // Reset all spots
+            document.querySelectorAll('.broken-spot').forEach(spot => {
+                spot.style.transform = '';
+                spot.style.boxShadow = '';
+            });
+
+            if (!draggedElement) return;
+
+            const plankNum = draggedElement.dataset.plank;
+            const spotNum = this.dataset.spot;
+
+            // Check if plank matches spot
+            if (plankNum === spotNum && !gameState.placedPlanks.has(spotNum)) {
+                snapPlankToSpot(draggedElement, this, spotNum);
+            }
+
+            return false;
+        }
+
+        function snapPlankToSpot(plank, spot, spotNum) {
+            const spotRect = spot.getBoundingClientRect();
+            const containerRect = document.querySelector('.beehive').getBoundingClientRect();
+
+            plank.style.position = 'absolute';
+            plank.style.left = (spotRect.left - containerRect.left) + 'px';
+            plank.style.top = (spotRect.top - containerRect.top) + 'px';
+            plank.style.width = spotRect.width + 'px';
+            plank.style.height = spotRect.height + 'px';
+            plank.style.zIndex = '100';
+            plank.classList.add('placed');
+            plank.setAttribute('draggable', 'false');
+            plank.dataset.spotTarget = spotNum;
+
+            document.querySelector('.beehive').appendChild(plank);
+
+            spot.classList.remove('highlight');
+            spot.style.transform = '';
+            spot.style.boxShadow = '';
+            gameState.placedPlanks.add(spotNum);
+
+            playSound('place');
+        }
+
+        function checkProximityAndSnap(plank, mouseX, mouseY) {
+            const plankNum = plank.dataset.plank;
+            const spots = document.querySelectorAll('.broken-spot');
+            const snapDistance = 80; // pixels
+            
+            spots.forEach(spot => {
+                const spotNum = spot.dataset.spot;
+                
+                if (plankNum === spotNum && !gameState.placedPlanks.has(spotNum)) {
+                    const spotRect = spot.getBoundingClientRect();
+                    const spotCenterX = spotRect.left + spotRect.width / 2;
+                    const spotCenterY = spotRect.top + spotRect.height / 2;
+                    
+                    const distance = Math.sqrt(
+                        Math.pow(mouseX - spotCenterX, 2) + 
+                        Math.pow(mouseY - spotCenterY, 2)
+                    );
+                    
+                    if (distance < snapDistance) {
+                        spot.style.transform = 'scale(1.1)';
+                        spot.style.boxShadow = '0 0 25px #FFD700';
+                    } else {
+                        spot.style.transform = '';
+                        spot.style.boxShadow = '';
+                    }
+                }
+            });
+        }
+
+        // Hammer functionality
+        const hammer = document.getElementById('hammer');
+        hammer.addEventListener('click', () => {
+            hammerMode = !hammerMode;
+            if (hammerMode) {
+                hammer.style.border = '3px solid yellow';
+                hammer.style.borderRadius = '50%';
+            } else {
+                hammer.style.border = 'none';
+            }
+        });
+
+        document.querySelectorAll('.wood-plank').forEach(plank => {
+            plank.addEventListener('click', function(e) {
+                if (!this.classList.contains('placed')) return;
+                
+                const spotNum = this.dataset.spotTarget;
+                
+                if (gameState.placedPlanks.has(spotNum) && !gameState.securedSpots.has(spotNum)) {
+                    this.classList.add('hammer-animation');
+                    this.classList.add('secured');
+                    
+                    gameState.securedSpots.add(spotNum);
+                    
+                    playSound('hammer');
+                    
+                    setTimeout(() => {
+                        this.classList.remove('hammer-animation');
+                    }, 300);
+                    
+                    checkWinCondition();
+                }
+            });
+        });
+
+        function checkWinCondition() {
+            if (gameState.securedSpots.size === gameState.totalSpots) {
+                setTimeout(() => {
+                    document.getElementById('winMessage').classList.add('show');
+                    playSound('win');
+                }, 500);
+            }
+        }
+
+        // Simple sound effects using Web Audio API
+        function playSound(type) {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            switch(type) {
+                case 'place':
+                    oscillator.frequency.value = 200;
+                    oscillator.type = 'sine';
+                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.1);
+                    break;
+                case 'hammer':
+                    oscillator.frequency.value = 150;
+                    oscillator.type = 'square';
+                    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.15);
+                    break;
+                case 'win':
+                    // Happy ascending tones
+                    [261.63, 329.63, 392.00, 523.25].forEach((freq, i) => {
+                        const osc = audioContext.createOscillator();
+                        const gain = audioContext.createGain();
+                        osc.connect(gain);
+                        gain.connect(audioContext.destination);
+                        osc.frequency.value = freq;
+                        osc.type = 'sine';
+                        gain.gain.setValueAtTime(0.2, audioContext.currentTime + i * 0.15);
+                        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + i * 0.15 + 0.3);
+                        osc.start(audioContext.currentTime + i * 0.15);
+                        osc.stop(audioContext.currentTime + i * 0.15 + 0.3);
+                    });
+                    break;
+            }
+        }
+
+        // Touch support for mobile
+        document.querySelectorAll('.wood-plank').forEach(plank => {
+            let touchStartX, touchStartY;
+            
+            plank.addEventListener('touchstart', function(e) {
+                if (this.classList.contains('placed')) return;
+                
+                const touch = e.touches[0];
+                touchStartX = touch.clientX;
+                touchStartY = touch.clientY;
+                
+                this.style.zIndex = '1000';
+                this.classList.add('dragging');
+            });
+            
+            plank.addEventListener('touchmove', function(e) {
+                if (this.classList.contains('placed')) return;
+                e.preventDefault();
+                
+                const touch = e.touches[0];
+                this.style.position = 'fixed';
+                this.style.left = (touch.clientX - this.offsetWidth / 2) + 'px';
+                this.style.top = (touch.clientY - this.offsetHeight / 2) + 'px';
+                
+                // Check proximity during touch move
+                checkProximityAndSnap(this, touch.clientX, touch.clientY);
+            });
+            
+            plank.addEventListener('touchend', function(e) {
+                if (this.classList.contains('placed')) return;
+                
+                this.classList.remove('dragging');
+                const touch = e.changedTouches[0];
+                const element = document.elementFromPoint(touch.clientX, touch.clientY);
+                
+                // Reset all spot highlights
+                document.querySelectorAll('.broken-spot').forEach(spot => {
+                    spot.style.transform = '';
+                    spot.style.boxShadow = '';
+                });
+                
+                if (element && element.classList.contains('broken-spot')) {
+                    const plankNum = this.dataset.plank;
+                    const spotNum = element.dataset.spot;
+                    
+                    if (plankNum === spotNum && !gameState.placedPlanks.has(spotNum)) {
+                        snapPlankToSpot(this, element, spotNum);
+                    }
+                } else {
+                    // Check if close enough to any spot to snap
+                    const plankNum = this.dataset.plank;
+                    const snapDistance = 100;
+                    let snapped = false;
+                    
+                    document.querySelectorAll('.broken-spot').forEach(spot => {
+                        if (snapped) return;
+                        const spotNum = spot.dataset.spot;
+                        
+                        if (plankNum === spotNum && !gameState.placedPlanks.has(spotNum)) {
+                            const spotRect = spot.getBoundingClientRect();
+                            const spotCenterX = spotRect.left + spotRect.width / 2;
+                            const spotCenterY = spotRect.top + spotRect.height / 2;
+                            
+                            const distance = Math.sqrt(
+                                Math.pow(touch.clientX - spotCenterX, 2) + 
+                                Math.pow(touch.clientY - spotCenterY, 2)
+                            );
+                            
+                            if (distance < snapDistance) {
+                                snapPlankToSpot(this, spot, spotNum);
+                                snapped = true;
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+        // Game control functions
+        function startGame() {
+            document.getElementById('splashScreen').classList.add('hidden');
+        }
+
+        function restartGame() {
+            // Reset game state
+            gameState.placedPlanks.clear();
+            gameState.securedSpots.clear();
+            
+            // Hide win message
+            document.getElementById('winMessage').classList.remove('show');
+            
+            // Reset all planks
+            document.querySelectorAll('.wood-plank').forEach((plank, index) => {
+                plank.classList.remove('placed', 'secured', 'hammer-animation');
+                plank.setAttribute('draggable', 'true');
+                plank.style.position = 'absolute';
+                plank.style.zIndex = '100';
+                
+                // Reset to original positions
+                const positions = [
+                    { left: '50px', bottom: '50px', width: '80px', height: '60px' },
+                    { left: '150px', bottom: '50px', width: '100px', height: '70px' },
+                    { left: '270px', bottom: '50px', width: '90px', height: '65px' },
+                    { left: '380px', bottom: '50px', width: '85px', height: '55px' }
+                ];
+                
+                plank.style.left = positions[index].left;
+                plank.style.bottom = positions[index].bottom;
+                plank.style.top = 'auto';
+                plank.style.width = positions[index].width;
+                plank.style.height = positions[index].height;
+                
+                // Move back to game container
+                document.querySelector('.game-container').appendChild(plank);
+            });
+            
+            // Reset all broken spots
+            document.querySelectorAll('.broken-spot').forEach(spot => {
+                spot.classList.add('highlight');
+                spot.style.transform = '';
+                spot.style.boxShadow = '';
+            });
+            
+            // Reset hammer mode
+            hammerMode = false;
+            hammer.style.border = 'none';
+        }
+    </script>
+</body>
+</html>
