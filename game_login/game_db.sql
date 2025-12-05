@@ -57,8 +57,9 @@ CREATE TABLE `users` (
   `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `age` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `users_unique` (`email`),
+  UNIQUE KEY `users_unique_1` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +68,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'user','email@gmail.com','$2b$10$z269qyriqS05SXobDKM55epgzdOGFPd4rq/PdndzN/4vplsTWkFFC',NULL),(2,'name','email@gmail.com','$2b$10$vqoTWrIM5RFVK./Vwcap..rwx7Nii8yymnsKlNTlP3JJCt.7YUbEa',NULL),(4,'hello','testing@gmail.com','$2b$10$e5oKtX/VuzUfAwz8FW1uN./8UyeVvfJo76Upjk1yLcEZvrd2R7ZVm',NULL),(6,'ref','test1@gmail.com','$2b$10$K9D..7vaYBHQCYVBIB4TT.Hct0zffeVnry5DIJfvffoIRBb31qrvi',NULL);
+INSERT INTO `users` VALUES (1,'user','email@gmail.com','$2b$10$z269qyriqS05SXobDKM55epgzdOGFPd4rq/PdndzN/4vplsTWkFFC',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,4 +85,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-12-05 17:04:50
+-- Dump completed on 2025-12-05 18:42:11
