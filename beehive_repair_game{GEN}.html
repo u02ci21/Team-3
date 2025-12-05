@@ -11,6 +11,25 @@
             box-sizing: border-box;
         }
 
+       
+            #hud {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      color: #000;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 18px;
+      z-index: 1000;
+    }
+        
+        
+        
+        
+        
+        
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif;
             background: 
@@ -895,6 +914,14 @@
     </style>
 </head>
 <body>
+
+
+    <div id="hud">
+        <div id="tokenDisplay">Tokens: 0</div>
+    </div>
+
+
+
     <div class="sun"></div>
     
     <div class="flower flower-1">🌸</div>
@@ -967,6 +994,9 @@
             <p>🐝🐝🐝</p>
         </div>
     </div>
+
+
+    <script src="tokens.js"></script> 
 
     <script>
         const gameState = {
@@ -1147,10 +1177,15 @@
 
         function checkWinCondition() {
             if (gameState.securedSpots.size === gameState.totalSpots) {
-                setTimeout(() => {
+                 {
+                    
                     document.getElementById('winMessage').classList.add('show');
                     playSound('win');
-                }, 500);
+                    addTokens(5);
+                    updateDisplay();
+
+
+                };
             }
         }
 
@@ -1324,6 +1359,12 @@
             hammerMode = false;
             hammer.style.border = 'none';
         }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      if (typeof updateDisplay === "function") updateDisplay(); 
+    });
+
+
     </script>
 </body>
 </html>
