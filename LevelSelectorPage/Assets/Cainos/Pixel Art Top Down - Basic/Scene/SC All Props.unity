@@ -1158,7 +1158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2c94ae9ec25427b9d95c77003cf5f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoverHighlight2D
-  highlightColor: {r: 1, g: 0.015686274, b: 0.015686274, a: 1}
+  highlightColor: {r: 0.1528312, g: 1, b: 0.015686274, a: 1}
 --- !u!1001 &230511703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8852,7 +8852,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "             Select Level: \n\n\n\n"
+  m_text: "              Select Level: \n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8861,8 +8861,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278244073
+  m_fontColor: {r: 0.9150943, g: 0.8234696, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8879,8 +8879,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 150
-  m_fontSizeBase: 150
+  m_fontSize: 140
+  m_fontSizeBase: 140
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10177,7 +10177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2c94ae9ec25427b9d95c77003cf5f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoverHighlight2D
-  highlightColor: {r: 1, g: 0.035368532, b: 0.015686274, a: 1}
+  highlightColor: {r: 0.12291037, g: 1, b: 0.015686274, a: 1}
 --- !u!1001 &1305459846
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13167,7 +13167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2c94ae9ec25427b9d95c77003cf5f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoverHighlight2D
-  highlightColor: {r: 1, g: 0.015686274, b: 0.015686274, a: 1}
+  highlightColor: {r: 0.1253108, g: 1, b: 0.015686274, a: 1}
 --- !u!1001 &1776978365
 PrefabInstance:
   m_ObjectHideFlags: 0
