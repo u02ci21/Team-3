@@ -53,6 +53,7 @@
     <Compile Include="Assets/ItemSpawner.cs" />
     <Compile Include="Assets/ItemData.cs" />
     <Compile Include="Assets/Bin.cs" />
+    <Compile Include="Assets/PickupManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/kenney_pixel-platformer/License.txt" />
