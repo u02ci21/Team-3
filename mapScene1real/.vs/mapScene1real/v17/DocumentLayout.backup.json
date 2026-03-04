@@ -1,0 +1,70 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\unitymaps\\mapScene1real\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|e:\\unitymaps\\mapscene1real\\assets\\gamescenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\gamescenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|e:\\unitymaps\\mapscene1real\\assets\\returntomain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\returntomain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|E:\\unitymaps\\mapScene1real\\assets\\tileclickhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\tileclickhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ReturnToMain.cs",
+              "DocumentMoniker": "E:\\unitymaps\\mapScene1real\\Assets\\ReturnToMain.cs",
+              "RelativeDocumentMoniker": "Assets\\ReturnToMain.cs",
+              "ToolTip": "E:\\unitymaps\\mapScene1real\\Assets\\ReturnToMain.cs",
+              "RelativeToolTip": "Assets\\ReturnToMain.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-02T01:13:54.37Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TileClickHandler.cs",
+              "DocumentMoniker": "E:\\unitymaps\\mapScene1real\\Assets\\TileClickHandler.cs",
+              "RelativeDocumentMoniker": "Assets\\TileClickHandler.cs",
+              "ToolTip": "E:\\unitymaps\\mapScene1real\\Assets\\TileClickHandler.cs",
+              "RelativeToolTip": "Assets\\TileClickHandler.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAiwE0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T22:07:24.411Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GameSceneManager.cs",
+              "DocumentMoniker": "E:\\unitymaps\\mapScene1real\\Assets\\GameSceneManager.cs",
+              "RelativeDocumentMoniker": "Assets\\GameSceneManager.cs",
+              "ToolTip": "E:\\unitymaps\\mapScene1real\\Assets\\GameSceneManager.cs",
+              "RelativeToolTip": "Assets\\GameSceneManager.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAowAoAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T23:03:23.488Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
