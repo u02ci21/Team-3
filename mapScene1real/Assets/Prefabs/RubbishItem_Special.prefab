@@ -183,3 +183,4 @@ MonoBehaviour:
   category: 3
   points: 15
   moveSpeed: 2
+  isHeld: 0

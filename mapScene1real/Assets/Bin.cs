@@ -1,5 +1,4 @@
 using UnityEngine;
-using TMPro;
 
 public enum ItemCategory { GeneralWaste, Recycling, DoNotPickUp, Special }
 
@@ -8,26 +7,22 @@ public class Bin : MonoBehaviour
     public ItemCategory acceptedCategory;
     public int penaltyPoints = -5;
 
-    void OnTriggerEnter2D(Collider2D other)
+    public void SortItem(ItemData item)
     {
-        ItemData item = other.GetComponent<ItemData>();
-        if (item == null) return;
-
         if (item.category == acceptedCategory)
         {
             ScoreManager.AddScore(item.points);
-            Debug.Log("Correct! +points");
+            Debug.Log("Correct! +" + item.points);
         }
         else if (item.category == ItemCategory.DoNotPickUp)
         {
-            Debug.Log("Thats a living creature! Put it back!");
+            ScoreManager.AddScore(penaltyPoints);
+            Debug.Log("Thats a living creature!");
         }
         else
         {
             ScoreManager.AddScore(penaltyPoints);
-            Debug.Log("Wrong bin!");
+            Debug.Log("Wrong bin! " + penaltyPoints);
         }
-
-        Destroy(other.gameObject);
     }
 }

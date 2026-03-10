@@ -16,6 +16,7 @@ public class PickupManager : MonoBehaviour
             if (hit.collider != null && hit.collider.GetComponent<ItemData>() != null)
             {
                 heldItem = hit.collider.gameObject;
+                heldItem.GetComponent<ItemData>().isHeld = true;
                 heldItem.GetComponent<Rigidbody2D>().simulated = false;
             }
         }
@@ -29,7 +30,32 @@ public class PickupManager : MonoBehaviour
 
         if (Mouse.current.leftButton.wasReleasedThisFrame && heldItem != null)
         {
-            heldItem.GetComponent<Rigidbody2D>().simulated = true;
+            // Check if dropped on a bin
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(
+                Mouse.current.position.ReadValue());
+            
+            Collider2D[] hits = Physics2D.OverlapPointAll(mousePos);
+            bool sortedIntoBin = false;
+
+            foreach (Collider2D col in hits)
+            {
+                Bin bin = col.GetComponent<Bin>();
+                if (bin != null)
+                {
+                    bin.SortItem(heldItem.GetComponent<ItemData>());
+                    Destroy(heldItem);
+                    sortedIntoBin = true;
+                    break;
+                }
+            }
+
+            if (!sortedIntoBin)
+            {
+                // Not dropped on a bin, return to river
+                heldItem.GetComponent<ItemData>().isHeld = false;
+                heldItem.GetComponent<Rigidbody2D>().simulated = true;
+            }
+
             heldItem = null;
         }
     }
