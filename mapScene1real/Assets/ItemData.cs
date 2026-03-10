@@ -9,6 +9,7 @@ public class ItemData : MonoBehaviour
 
     private float startY;
     private float randomOffset;
+    public bool isHeld = false;
 
     void Start()
     {
@@ -19,15 +20,12 @@ public class ItemData : MonoBehaviour
 
     void Update()
     {
-        // Move right
+        if (isHeld) return; // stop moving when held
+
         float newX = transform.position.x + moveSpeed * Time.deltaTime;
-
-        // Wave up and down but stay near starting Y position
         float newY = startY + Mathf.Sin((Time.time + randomOffset) * 2f) * 0.3f;
-
         transform.position = new Vector2(newX, newY);
 
-        // Destroy item if it goes off the right side of the screen
         if (transform.position.x > 12f)
             Destroy(gameObject);
     }
