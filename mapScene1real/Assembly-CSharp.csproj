@@ -52,10 +52,13 @@
     <Compile Include="Assets/ScoreManager.cs" />
     <Compile Include="Assets/ItemSpawner.cs" />
     <Compile Include="Assets/ItemData.cs" />
+    <Compile Include="Assets/HealthHeartSystem/Scripts/HealthBarController.cs" />
     <Compile Include="Assets/GameSceneManager.cs" />
+    <Compile Include="Assets/HealthHeartSystem/Scripts/PlayerStats.cs" />
     <Compile Include="Assets/TileClickHandler.cs" />
     <Compile Include="Assets/Bin.cs" />
     <Compile Include="Assets/PickupManager.cs" />
+    <Compile Include="Assets/HealthHeartSystem/Scripts/HealthBarHUDTester.cs" />
     <Compile Include="Assets/ReturnToMain.cs" />
     <Compile Include="Assets/IntroDialogue.cs" />
     <Compile Include="Assets/EventSystemManager.cs" />
@@ -77,6 +80,7 @@
     <None Include="Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF.shader" />
+    <None Include="Assets/HealthHeartSystem/readme.txt" />
     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt" />
     <None Include="Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc" />
