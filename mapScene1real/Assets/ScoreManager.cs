@@ -1,15 +1,16 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
-    public TMP_Text scoreText;
+    public Text scoreText;
     private static int score = 0;
 
     void Awake()
     {
         Instance = this;
+        score = 0;
     }
 
     public static void AddScore(int amount)
