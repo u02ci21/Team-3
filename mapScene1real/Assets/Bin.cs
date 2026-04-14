@@ -16,13 +16,14 @@ public class Bin : MonoBehaviour
         }
         else if (item.category == ItemCategory.DoNotPickUp)
         {
-            ScoreManager.AddScore(penaltyPoints);
-            Debug.Log("Thats a living creature!");
+            Debug.Log("Calling UI feedback nwo");
+            Debug.Log("Thats a living creature, dont put wildlife in the bin!");
         }
         else
         {
             ScoreManager.AddScore(penaltyPoints);
-            Debug.Log("Wrong bin! " + penaltyPoints);
+            HeartSystem.LoseLife();
+            Debug.Log("Wrong bin!");
         }
     }
 }
