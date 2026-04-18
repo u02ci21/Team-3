@@ -19,9 +19,13 @@ public class HeartSystem : MonoBehaviour
         Instance.hearts[Instance.currentLives].enabled = false;
 
         if (Instance.currentLives <= 0)
-        {
-            Debug.Log("Game Over!");
-            Time.timeScale = 0;
-        }
+            Instance.GameOver();
+    }
+
+    void GameOver()
+    {
+        Debug.Log("Game Over!");
+        Time.timeScale = 0;
+        GameManager.Instance.ShowGameOver();
     }
 }
