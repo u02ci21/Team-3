@@ -1,34 +1,257 @@
-<!-- <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> CHARLIE </title>
-  </head>
-  <body>
-    <header>
-      <p> CHARLIE </p>
-    </header>
-    <main>
-      <canvas id="gameCanvas"></canvas>
-    </main>
-    <footer>
-      <p>Group 3</p>
-    </footer>
-    <script type="module" src="/src/main.js"></script>
-  </body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Character Select</title>
-  </head>
-  <body>
-    <canvas id="gameCanvas"></canvas>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <title>The Sustainables</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px;
+            background: white;
+            border: 1px solid gainsboro;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            background: white;
+            border-bottom: none;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        .message {
+            padding: 10px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .message.error {
+            background: peachpuff;
+            color:red;
+            display: block;
+        }
+
+        .message.success {
+            background: lime;
+            color:  green;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>The Sustainables</h1>
+
+    <div class="tabs">
+        <button type="button" class="tab active" id="tab-login" onclick="switchTab('login')">Log In</button>
+        <button type="button" class="tab" id="tab-signup" onclick="switchTab('signup')">Sign Up</button>
+    </div>
+
+    <div id="login-section" class="form-section active">
+        <div id="login-message" class="message"></div>
+        <form id="login-form" novalidate>
+            <label>Email
+                <input type="email" id="login-email">
+            </label>
+            <label>Password
+                <input type="password" id="login-password">
+            </label>
+            <button type="submit" id="login-btn">Log In</button>
+        </form>
+    </div>
+
+    <div id="signup-section" class="form-section">
+        <div id="signup-message" class="message"></div>
+        <form id="signup-form" novalidate>
+            <label>Username
+                <input type="text" id="signup-username">
+            </label>
+            <label>Email
+                <input type="email" id="signup-email">
+            </label>
+            <label>Password
+                <input type="password" id="signup-password">
+            </label>
+            <button type="submit" id="signup-btn">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        function switchTab(target) {
+            document.getElementById('tab-login').classList.remove('active');
+            document.getElementById('tab-signup').classList.remove('active');
+            document.getElementById('tab-' + target).classList.add('active');
+
+            document.getElementById('login-section').classList.remove('active');
+            document.getElementById('signup-section').classList.remove('active');
+            document.getElementById(target + '-section').classList.add('active');
+
+            document.getElementById('login-message').style.display = 'none';
+            document.getElementById('signup-message').style.display = 'none';
+        }
+
+        const SUPABASE_URL = 'https://oynhlpajwzsjqknxcnxa.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95bmhscGFqd3pzanFrbnhjbnhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5OTg4NTMsImV4cCI6MjA5MTU3NDg1M30.SAlaBAgVkpDGQQJLZ9kCw27P-FxuGZDKUkmf_yPYJGo';
+
+        const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        const REDIRECT_AFTER_LOGIN = 'game.html';
+
+        function showMessage(type, formType, text) {
+            const el = document.getElementById(formType + '-message');
+            el.textContent = text;
+            el.className = 'message ' + type;
+            el.style.display = 'block';
+        }
+
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('signup-username').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
+            const password = document.getElementById('signup-password').value;
+            const btn = document.getElementById('signup-btn');
+
+            if (username.length < 3) {
+                showMessage('error', 'signup', 'Your username needs to be at least 3 letters.');
+                return;
+            }
+            if (!email.includes('@') || !email.includes('.')) {
+                showMessage('error', 'signup', 'Please type a real email address.');
+                return;
+            }
+            if (password.length < 6) {
+                showMessage('error', 'signup', 'Your password needs to be at least 6 characters.');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Creating account...';
+
+            try {
+                const { data: authData, error: authError } = await sb.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: {
+                        data: { username: username }
+                    }
+                });
+
+                if (authError) throw authError;
+                if (!authData.user) throw new Error('Could not create your account. Try again.');
+
+                showMessage('success', 'signup', 'Account created. Check your email to finish signing up.');
+                document.getElementById('signup-form').reset();
+
+            } catch (error) {
+                console.error('Signup error:', error);
+                let msg = error.message || 'Something went wrong. Try again.';
+                if (msg.includes('already registered') || msg.includes('already been')) {
+                    msg = 'That email is already used. Try logging in.';
+                }
+                showMessage('error', 'signup', msg);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Sign Up';
+            }
+        });
+
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            const btn = document.getElementById('login-btn');
+
+            if (!email) {
+                showMessage('error', 'login', 'Please type your email.');
+                return;
+            }
+            if (!password) {
+                showMessage('error', 'login', 'Please type your password.');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Loading...';
+
+            try {
+                const { data, error } = await sb.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+
+                if (error) throw error;
+
+                showMessage('success', 'login', 'Welcome back. Redirecting...');
+
+                setTimeout(() => {
+                    window.location.href = REDIRECT_AFTER_LOGIN;
+                }, 800);
+
+            } catch (error) {
+                console.error('Login error:', error);
+                let msg = 'Login failed. Check your email and password.';
+                if (error.message && error.message.includes('Email not confirmed')) {
+                    msg = 'Please check your email to confirm your account first.';
+                }
+                showMessage('error', 'login', msg);
+                btn.disabled = false;
+                btn.textContent = 'Log In';
+            }
+        });
+
+        // Uncomment once game.html exists:
+        /*
+        window.addEventListener('DOMContentLoaded', async () => {
+            const { data: { session } } = await sb.auth.getSession();
+            if (session) {
+                window.location.href = REDIRECT_AFTER_LOGIN;
+            }
+        });
+        */
+    </script>
+</body>
 </html>

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 30cdd79da9e4246448888cf7cb3d7ff1
+guid: a14e6c2e39ded462b9d6b3ba635b8c16
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7882293977378504605
-    second: Plastic water bottle on checkered background_0
+      213: 901274686195660681
+    second: crisppacket_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 450
+  spritePixelsToUnits: 600
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -87,12 +87,12 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 12
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Plastic water bottle on checkered background_0
+      name: crisppacket_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 11
-        width: 1021
-        height: 1467
+        x: 21
+        y: 79
+        width: 935
+        height: 839
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3604727c3677c9290800000000000000
-      internalID: -7882293977378504605
+      spriteID: 9877ebb4d88f18c00800000000000000
+      internalID: 901274686195660681
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Plastic water bottle on checkered background_0: -7882293977378504605
+      crisppacket_0: 901274686195660681
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -18,10 +18,12 @@ public class ScoreManager : MonoBehaviour
         score += amount;
         if (Instance != null && Instance.scoreText != null)
             Instance.scoreText.text = "Score: " + score;
+        GameManager.CheckScore(score);
     }
 
     public static int GetScore()
     {
         return score;
     }
+
 }
