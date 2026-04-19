@@ -16,8 +16,8 @@ public class Bin : MonoBehaviour
         }
         else if (item.category == ItemCategory.DoNotPickUp)
         {
-            Debug.Log("Calling UI feedback nwo");
-            Debug.Log("Thats a living creature, dont put wildlife in the bin!");
+            HeartSystem.LoseLife();
+            Debug.Log("Dont put wildlife in the bin!");
         }
         else
         {
