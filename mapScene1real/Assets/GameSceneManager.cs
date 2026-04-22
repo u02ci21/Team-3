@@ -6,7 +6,6 @@ using System.Collections;
 
 public class GameSceneManager : MonoBehaviour
 {
-    // Add this line - makes it accessible from anywhere
     public static GameSceneManager Instance { get; private set; }
 
     [Header("Scene Names")]
@@ -19,9 +18,10 @@ public class GameSceneManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI statusText;
     [SerializeField] private TextMeshProUGUI percentageText;
 
+    private bool isLoading = false; // Track if a load is in progress
+
     void Awake()
     {
-        // Singleton pattern
         if (Instance == null)
         {
             Instance = this;
@@ -30,94 +30,90 @@ public class GameSceneManager : MonoBehaviour
             if (loadingScreenPanel != null)
                 loadingScreenPanel.SetActive(false);
         }
-        else
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }
     }
 
-public void LoadStreamGame()
+    public void LoadStreamGame()
     {
+        if (isLoading)
+        {
+            Debug.Log("Already loading a scene, ignoring request");
+            return;
+        }
         StartCoroutine(LoadSceneAsync(streamGameSceneName));
     }
 
     public void LoadMainGame()
     {
+        if (isLoading)
+        {
+            Debug.Log("Already loading a scene, ignoring request");
+            return;
+        }
         StartCoroutine(LoadSceneAsync(mainGameSceneName));
     }
 
     IEnumerator LoadSceneAsync(string sceneName)
     {
-        Debug.Log("Starting to load scene: " + sceneName);
+        isLoading = true;
 
-        // SHOW loading screen
+        // Don't load the scene we're already in
+        if (SceneManager.GetActiveScene().name == sceneName)
+        {
+            Debug.Log($"Already in scene: {sceneName}");
+            isLoading = false;
+            yield break;
+        }
+
+        Debug.Log($"Starting to load scene: {sceneName}");
+
+        // Show loading screen
         if (loadingScreenPanel != null)
         {
             loadingScreenPanel.SetActive(true);
-            Debug.Log("Loading screen shown");
         }
 
-        // Reset UI elements
+        // Reset UI
         if (progressSlider != null)
             progressSlider.value = 0;
-
+        if (percentageText != null)
+            percentageText.text = "0%";
         if (statusText != null)
             statusText.text = "Loading...";
 
-        if (percentageText != null)
-            percentageText.text = "0%";
-
-        // Start loading the scene
+        // Start loading
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-        asyncLoad.allowSceneActivation = true; // Let it activate immediately
 
-        // This prevents the loading from completing in the same frame
-        asyncLoad.allowSceneActivation = false;
+        // IMPORTANT: Allow it to activate automatically
+        asyncLoad.allowSceneActivation = true;
 
         // Update progress while loading
-        while (asyncLoad.progress < 0.9f)
+        while (!asyncLoad.isDone)
         {
+            // Progress goes from 0 to 0.9 for loading, then 1.0 when activated
             float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
             int percent = Mathf.RoundToInt(progress * 100);
 
-            // Update UI
             if (progressSlider != null)
                 progressSlider.value = progress;
-
-            if (statusText != null)
-                statusText.text = "Loading...";
-
             if (percentageText != null)
                 percentageText.text = percent + "%";
 
-            Debug.Log("Loading progress: " + percent + "%");
             yield return null;
         }
 
-        // At 90% loaded, scene is almost ready
-        Debug.Log("Scene ready to activate!");
+        // Scene is now fully loaded and active
+        Debug.Log($"Scene {sceneName} fully loaded");
 
-        // Update to 100% to show it's ready
-        if (progressSlider != null)
-            progressSlider.value = 1f;
-
-        if (percentageText != null)
-            percentageText.text = "100%";
-
-        if (statusText != null)
-            statusText.text = "Loading...";
-
-        // Small delay so player sees 100%
-        yield return new WaitForSeconds(0.5f);
-
-        // HIDE loading screen BEFORE activating scene
+        // Hide loading screen
         if (loadingScreenPanel != null)
         {
             loadingScreenPanel.SetActive(false);
-            Debug.Log("Loading screen hidden");
         }
 
-        // Now activate the scene
-        asyncLoad.allowSceneActivation = true;
+        isLoading = false;
     }
 }
