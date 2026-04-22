@@ -56,7 +56,7 @@ public class Timer : MonoBehaviour
     void OnTimeUp()
     {
         Debug.Log("Time's up!");
-        GameManager.Instance.OnTimeUp();
+        SoilGameManager.Instance.OnTimeUp();
     }
 
     public void ApplyPenalty(float seconds)

@@ -2,11 +2,11 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class SoilGameManager : MonoBehaviour
 {
     public bool PopupOpen { get; private set; }
     public bool GameOver { get; private set; }
-    public static GameManager Instance;
+    public static SoilGameManager Instance;
 
     [Header("Game Over")]
     public GameObject gameOverPanel;

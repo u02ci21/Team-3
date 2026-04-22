@@ -39,6 +39,6 @@ public class FactPopup : MonoBehaviour
         yield return null;
         popupPanel.SetActive(false);
         FindObjectOfType<Timer>().ResumeTimer();
-        GameManager.Instance.OnFactDismissed();
+        SoilGameManager.Instance.OnFactDismissed();
     }
 }

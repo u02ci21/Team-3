@@ -116,4 +116,19 @@ public class GameSceneManager : MonoBehaviour
 
         isLoading = false;
     }
+
+    public void LoadMainPage()
+    {
+        StartCoroutine(LoadSceneAsync("MainPage"));
+    }
+
+    public void LoadSettingsScene()
+    {
+        StartCoroutine(LoadSceneAsync("SettingScene"));
+    }
+
+    public void LoadSoilGame()
+    {
+        StartCoroutine(LoadSceneAsync("SoilPlantingScene"));
+    }
 }
