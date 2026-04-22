@@ -1,23 +1,23 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
+using System.Collections;
 
 public class ReturnToMain : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private string mainGameSceneName = "MainGame";
+    [SerializeField] private string mainGameSceneName = "harmonygarden";
 
     [Header("References")]
     [SerializeField] private Button returnButton;
 
+    private bool isLoading = false; // Prevent multiple loads
+
     void Start()
     {
-        // Try to get the button component if not assigned
         if (returnButton == null)
             returnButton = GetComponent<Button>();
 
-        // Add a listener to the button
         if (returnButton != null)
             returnButton.onClick.AddListener(ReturnToMainGame);
         else
@@ -26,21 +26,30 @@ public class ReturnToMain : MonoBehaviour
 
     void ReturnToMainGame()
     {
-        Debug.Log("Returning to main game...");
+        // Prevent spamming the button
+        if (isLoading) return;
 
-        // Try to find the GameSceneManager
+        Debug.Log("Returning to main game...");
+        isLoading = true;
+
         GameSceneManager sceneManager = FindFirstObjectByType<GameSceneManager>();
 
         if (sceneManager != null)
         {
-            // Use the GameSceneManager to load the main game
             sceneManager.LoadMainGame();
         }
         else
         {
-            // Fallback direct load
-            Debug.LogWarning("GameSceneManager not found, loading directly");
             SceneManager.LoadScene(mainGameSceneName);
         }
+
+        // Reset loading flag after a delay
+        StartCoroutine(ResetLoadingFlag());
+    }
+
+    IEnumerator ResetLoadingFlag()
+    {
+        yield return new WaitForSeconds(1f);
+        isLoading = false;
     }
 }
