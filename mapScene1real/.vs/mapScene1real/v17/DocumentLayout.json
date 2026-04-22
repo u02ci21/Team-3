@@ -3,11 +3,35 @@
   "WorkspaceRootPath": "E:\\team3realconnected\\Team-3\\mapScene1real\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|E:\\team3realconnected\\Team-3\\mapScene1real\\assets\\scripts\\soilgamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\soilgamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|E:\\team3realconnected\\Team-3\\mapScene1real\\assets\\gamescenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\gamescenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|E:\\team3realconnected\\Team-3\\mapScene1real\\assets\\scripts\\gamescenemanagersoil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamescenemanagersoil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|e:\\team3realconnected\\team-3\\mapscene1real\\assets\\soiltileclickhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\soiltileclickhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|e:\\team3realconnected\\team-3\\mapscene1real\\assets\\tileclickhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\tileclickhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|E:\\team3realconnected\\Team-3\\mapScene1real\\assets\\returntomain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\returntomain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|E:\\team3realconnected\\Team-3\\mapScene1real\\assets\\scripts\\soilplot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\soilplot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|e:\\team3realconnected\\team-3\\mapscene1real\\assets\\scripts\\factpopup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|E:\\team3realconnected\\Team-3\\mapScene1real\\assets\\scripts\\factpopup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\factpopup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -15,28 +39,8 @@
       "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\soiltimer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|E:\\team3realconnected\\Team-3\\mapScene1real\\assets\\scripts\\soilgamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\soilgamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|E:\\team3realconnected\\Team-3\\mapScene1real\\assets\\scripts\\gamescenemanagersoil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamescenemanagersoil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|E:\\team3realconnected\\Team-3\\mapScene1real\\assets\\gamescenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\gamescenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|E:\\team3realconnected\\Team-3\\mapScene1real\\assets\\tileclickhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\tileclickhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|E:\\team3realconnected\\Team-3\\mapScene1real\\assets\\cainos\\pixel art top down - basic\\scene\\world1selector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\cainos\\pixel art top down - basic\\scene\\world1selector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|E:\\team3realconnected\\Team-3\\mapScene1real\\assets\\returntomain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{185AC2FF-BA93-76C1-6558-77119F8F9BA3}|Assembly-CSharp.csproj|solutionrelative:assets\\returntomain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,15 +50,41 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 6,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "soiltileclickhandler.cs",
+              "DocumentMoniker": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\soiltileclickhandler.cs",
+              "RelativeDocumentMoniker": "Assets\\soiltileclickhandler.cs",
+              "ToolTip": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\soiltileclickhandler.cs",
+              "RelativeToolTip": "Assets\\soiltileclickhandler.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAowC8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T20:38:05.076Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TileClickHandler.cs",
+              "DocumentMoniker": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\TileClickHandler.cs",
+              "RelativeDocumentMoniker": "Assets\\TileClickHandler.cs",
+              "ToolTip": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\TileClickHandler.cs",
+              "RelativeToolTip": "Assets\\TileClickHandler.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAADwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T18:15:00.827Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "FactPopup.cs",
               "DocumentMoniker": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\Scripts\\FactPopup.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\FactPopup.cs",
@@ -62,12 +92,11 @@
               "RelativeToolTip": "Assets\\Scripts\\FactPopup.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAAkwCsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-22T19:46:15.572Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-22T19:46:15.572Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "SoilTimer.cs",
               "DocumentMoniker": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\Scripts\\SoilTimer.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\SoilTimer.cs",
@@ -79,7 +108,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "SoilPlot.cs",
               "DocumentMoniker": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\Scripts\\SoilPlot.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\SoilPlot.cs",
@@ -87,48 +116,37 @@
               "RelativeToolTip": "Assets\\Scripts\\SoilPlot.cs",
               "ViewState": "AgIAACwAAAAAAAAAAAAIwBwBAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-22T19:43:42.781Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-22T19:43:42.781Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "SoilGameManager.cs",
               "DocumentMoniker": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\Scripts\\SoilGameManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\SoilGameManager.cs",
               "ToolTip": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\Scripts\\SoilGameManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\SoilGameManager.cs",
-              "ViewState": "AgIAAHAAAAAAAAAAAAAYwBgAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAYwI0AAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-22T19:41:45.516Z"
+              "WhenOpened": "2026-04-22T19:41:45.516Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "GameSceneManagerSoil.cs",
               "DocumentMoniker": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\Scripts\\GameSceneManagerSoil.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\GameSceneManagerSoil.cs",
               "ToolTip": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\Scripts\\GameSceneManagerSoil.cs",
               "RelativeToolTip": "Assets\\Scripts\\GameSceneManagerSoil.cs",
-              "ViewState": "AgIAAG0AAAAAAAAAAAAcwIgAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAAowIwAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-22T19:36:16.178Z"
+              "WhenOpened": "2026-04-22T19:36:16.178Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "TileClickHandler.cs",
-              "DocumentMoniker": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\TileClickHandler.cs",
-              "RelativeDocumentMoniker": "Assets\\TileClickHandler.cs",
-              "ToolTip": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\TileClickHandler.cs",
-              "RelativeToolTip": "Assets\\TileClickHandler.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAowC8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-22T18:15:00.827Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "world1selector.cs",
               "DocumentMoniker": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\Cainos\\Pixel Art Top Down - Basic\\Scene\\world1selector.cs",
               "RelativeDocumentMoniker": "Assets\\Cainos\\Pixel Art Top Down - Basic\\Scene\\world1selector.cs",
@@ -140,27 +158,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 5,
               "Title": "ReturnToMain.cs",
               "DocumentMoniker": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\ReturnToMain.cs",
               "RelativeDocumentMoniker": "Assets\\ReturnToMain.cs",
               "ToolTip": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\ReturnToMain.cs",
               "RelativeToolTip": "Assets\\ReturnToMain.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAqwCkAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-22T17:59:36.551Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "GameSceneManager.cs",
               "DocumentMoniker": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\GameSceneManager.cs",
               "RelativeDocumentMoniker": "Assets\\GameSceneManager.cs",
               "ToolTip": "E:\\team3realconnected\\Team-3\\mapScene1real\\Assets\\GameSceneManager.cs",
               "RelativeToolTip": "Assets\\GameSceneManager.cs",
-              "ViewState": "AgIAAFgAAAAAAAAAAAAcwHYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAAAAwwDgAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-22T17:55:09.092Z"
+              "WhenOpened": "2026-04-22T17:55:09.092Z",
+              "EditorCaption": ""
             }
           ]
         }

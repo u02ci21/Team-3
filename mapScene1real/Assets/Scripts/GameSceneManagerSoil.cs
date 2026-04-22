@@ -135,4 +135,9 @@ public void LoadStreamGame()
     {
         StartCoroutine(LoadSceneAsync("SoilPlantingScene"));
     }
+
+    public void LoadLevelSelect()
+    {
+        StartCoroutine(LoadSceneAsync("SC All Props"));
+    }
 }
