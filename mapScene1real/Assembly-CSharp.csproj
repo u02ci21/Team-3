@@ -74,6 +74,7 @@
     <Compile Include="Assets\ItemData.cs" />
     <Compile Include="Assets\Cainos\Pixel Art Top Down - Basic\Script\SpriteColorAnimation.cs" />
     <Compile Include="Assets\Scripts\SeedType.cs" />
+    <Compile Include="Assets\soiltileclickhandler.cs" />
     <Compile Include="Assets\Scripts\GameSceneManagerSoil.cs" />
     <Compile Include="Assets\HeartSystem.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />

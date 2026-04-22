@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TileClickHandler : MonoBehaviour
+public class soilTileClickHandler : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private bool loadStreamGame = true;
+    [SerializeField] private bool loadSoilGame = true;
 
     private Tilemap tilemap;
 
@@ -34,14 +34,14 @@ public class TileClickHandler : MonoBehaviour
         // Use the static Instance directly 
         if (GameSceneManager.Instance == null)
         {
-            Debug.LogError("GameSceneManager.Instance is NULL! Make sure GameSceneManager exists in the scene.");
+            Debug.LogError("GameSceneManagerSoil.Instance is NULL! Make sure GameSceneManagerSoil exists in the scene.");
             return;
         }
 
-        Debug.Log("Loading " + (loadStreamGame ? "STREAM GAME" : "MAIN GAME"));
+        Debug.Log("Loading " + (loadSoilGame ? "SOIL GAME" : "MAIN GAME"));
 
-        if (loadStreamGame)
-            GameSceneManager.Instance.LoadStreamGame();
+        if (loadSoilGame)
+            GameSceneManager.Instance.LoadSoilGame();
         else
             GameSceneManager.Instance.LoadMainGame();
     }

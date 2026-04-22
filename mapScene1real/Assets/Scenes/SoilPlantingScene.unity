@@ -880,9 +880,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Menu
-
-'
+  m_text: Return
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9444da3e0f5d47e459019e415f85aaf5, type: 2}
   m_sharedMaterial: {fileID: -8574340598032546156, guid: 9444da3e0f5d47e459019e415f85aaf5, type: 2}
@@ -1121,8 +1119,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 758899157}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: GoToMainMenu
+        m_TargetAssemblyTypeName: SoilGameManager, Assembly-CSharp
+        m_MethodName: LoadMainGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2179,9 +2177,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Main Menu
-
-'
+  m_text: Return to garden
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9444da3e0f5d47e459019e415f85aaf5, type: 2}
   m_sharedMaterial: {fileID: -8574340598032546156, guid: 9444da3e0f5d47e459019e415f85aaf5, type: 2}
@@ -3379,8 +3375,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 758899157}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: GoToMainMenu
+        m_TargetAssemblyTypeName: SoilGameManager, Assembly-CSharp
+        m_MethodName: LoadMainGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

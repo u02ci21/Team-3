@@ -132,6 +132,11 @@ public class SoilGameManager : MonoBehaviour
         SceneManager.LoadScene("MainPage");
     }
 
+    public void LoadMainGame()
+    {
+        SceneManager.LoadScene("harmonygarden");
+    }
+
     public void ResetPlotCompleted(int plotIndex)
     {
         if (plotIndex >= 0 && plotIndex < plotCompleted.Length)

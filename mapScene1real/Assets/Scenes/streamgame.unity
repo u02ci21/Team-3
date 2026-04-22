@@ -36707,7 +36707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d2da7748b5f4ae46bcc9fe7eebaf259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReturnToMain
-  mainGameSceneName: MainGame
+  mainGameSceneName: harmonygarden
   returnButton: {fileID: 2069470022}
 --- !u!1 &2115983029
 GameObject:
