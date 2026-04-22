@@ -60,7 +60,7 @@ public class SoilPlot : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (GameManager.Instance.PopupOpen || GameManager.Instance.GameOver) return;
+        if (SoilGameManager.Instance.PopupOpen || SoilGameManager.Instance.GameOver) return;
 
         if (isLocked)
         {
@@ -186,7 +186,7 @@ public class SoilPlot : MonoBehaviour
         {
             if (currentState != PlotState.Planted && currentState != PlotState.Watered) yield break;
 
-            if (GameManager.Instance.PopupOpen || GameManager.Instance.GameOver)
+            if (SoilGameManager.Instance.PopupOpen || SoilGameManager.Instance.GameOver)
             {
                 yield return null;
                 continue;
@@ -224,8 +224,8 @@ public class SoilPlot : MonoBehaviour
             plantedSeedObject = null;
         }
 
-        int plotIndex = System.Array.IndexOf(GameManager.Instance.plots, this);
-        GameManager.Instance.ResetPlotCompleted(plotIndex);
+        int plotIndex = System.Array.IndexOf(SoilGameManager.Instance.plots, this);
+        SoilGameManager.Instance.ResetPlotCompleted(plotIndex);
     }
 
     public void FlashWrong()
@@ -264,7 +264,7 @@ public class SoilPlot : MonoBehaviour
         spriteRenderer.color = originalColor;
         if (cropTiler != null) cropTiler.SetColor(Color.white);
 
-        GameManager.Instance.OnPlotCompleted(System.Array.IndexOf(GameManager.Instance.plots, this));
+        SoilGameManager.Instance.OnPlotCompleted(System.Array.IndexOf(SoilGameManager.Instance.plots, this));
 
         waterTimerCoroutine = StartCoroutine(WaterCountdown());
 
