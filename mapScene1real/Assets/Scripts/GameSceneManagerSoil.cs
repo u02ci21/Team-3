@@ -140,4 +140,14 @@ public void LoadStreamGame()
     {
         StartCoroutine(LoadSceneAsync("SC All Props"));
     }
+
+    public void OnLogoutPressed()
+    {
+        Application.OpenURL("https://team3charlie1.netlify.app/logout.html");
+    }
+
+    public void OnDeleteAccountPressed()
+    {
+        Application.OpenURL("https://team3charlie1.netlify.app/delete.html");
+    }
 }
