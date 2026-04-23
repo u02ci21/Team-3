@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Account</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 10px 24px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .btn-delete {
+            background: #c0392b;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #a93226;
+        }
+
+        .btn-delete:disabled {
+            background: #bbb;
+            cursor: not-allowed;
+        }
+
+        .btn-cancel {
+            background: #eee;
+            color: #333;
+        }
+
+        .btn-cancel:hover {
+            background: #ddd;
+        }
+
+        .message {
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .message.error {
+            background: #fdd;
+            color: #900;
+            display: block;
+        }
+
+        .message.success {
+            background: #dfd;
+            color: #060;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <h1>Delete Account</h1>
+        <p>Are you sure you want to delete your account?</p>
+
+        <div class="warning">
+            This will permanently delete your account and all your progress. This cannot be undone.
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <div class="buttons">
+            <button class="btn-cancel" onclick="goBack()">Cancel</button>
+            <button class="btn-delete" id="delete-btn" onclick="deleteAccount()">Yes, Delete My Account</button>
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://oynhlpajwzsjqknxcnxa.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95bmhscGFqd3pzanFrbnhjbnhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5OTg4NTMsImV4cCI6MjA5MTU3NDg1M30.SAlaBAgVkpDGQQJLZ9kCw27P-FxuGZDKUkmf_yPYJGo';
+
+        const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Check user is logged in when page loads
+        window.addEventListener('DOMContentLoaded', async () => {
+            const { data: { session } } = await sb.auth.getSession();
+
+            if (!session) {
+                // Not logged in, send back to login
+                window.location.href = 'https://team3charlie1.netlify.app/index.html';
+            }
+        });
+
+        function showMessage(type, text) {
+            const el = document.getElementById('message');
+            el.textContent = text;
+            el.className = 'message ' + type;
+            el.style.display = 'block';
+        }
+
+        function goBack() {
+            // Go back to wherever they came from (the Unity game)
+            window.history.back();
+        }
+
+        async function deleteAccount() {
+            const btn = document.getElementById('delete-btn');
+            btn.disabled = true;
+            btn.textContent = 'Deleting...';
+
+            try {
+                // Call the delete_user database function we set up earlier
+                const { error } = await sb.rpc('delete_user');
+
+                if (error) throw error;
+
+                // Sign out and redirect to login
+                await sb.auth.signOut();
+
+                showMessage('success', 'Account deleted. Redirecting...');
+
+                setTimeout(() => {
+                    window.location.href = 'https://team3charlie1.netlify.app/index.html';
+                }, 1500);
+
+            } catch (error) {
+                console.error('Delete error:', error);
+                showMessage('error', error.message || 'Something went wrong. Please try again.');
+                btn.disabled = false;
+                btn.textContent = 'Yes, Delete My Account';
+            }
+        }
+    </script>
+</body>
+</html>
