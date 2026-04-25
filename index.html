@@ -46,6 +46,10 @@
             <label>Date of Birth <input type="date" id="signup-dob"></label>
             <label>Email <input type="email" id="signup-email"></label>
             <label>Password <input type="password" id="signup-password"></label>
+            <label style="margin-top:14px; font-size:14px;">
+                <input type="checkbox" id="signup-terms" style="width:auto; margin-right:6px;">
+                I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a>
+            </label>
             <button type="submit" id="signup-btn">Sign Up</button>
         </form>
 
@@ -55,6 +59,10 @@
             <div id="parental-message" class="message"></div>
             <form id="parental-form" novalidate>
                 <label>Parent or Guardian Email <input type="email" id="parent-email"></label>
+                <label style="margin-top:14px; font-size:14px;">
+                    <input type="checkbox" id="parental-terms" style="width:auto; margin-right:6px;">
+                    I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a> on behalf of my child
+                </label>
                 <button type="submit" id="parental-btn">Send Verification Code</button>
                 <button type="button" class="link-button" onclick="showSignupForm()">Back</button>
             </form>
@@ -159,6 +167,7 @@
             if (!dob)                  return msg('error', 'signup', 'Please enter your date of birth.');
             if (!isValidEmail(email))  return msg('error', 'signup', 'Please enter a valid email address.');
             if (password.length < 6)   return msg('error', 'signup', 'Password needs at least 6 characters.');
+            if (!document.getElementById('signup-terms').checked) return msg('error', 'signup', 'You must agree to the Terms and Conditions.');
 
             if (getAge(dob) < 13) {
                 pendingSignup = { username, email, password };
@@ -187,8 +196,9 @@
             e.preventDefault();
             const parentEmail = document.getElementById('parent-email').value.trim();
 
-            if (!isValidEmail(parentEmail))        return msg('error', 'parental', 'Please enter a valid email address.');
+            if (!isValidEmail(parentEmail))        return msg('error', 'parental', 'Please enter your email address as the parent/guardian.');
             if (parentEmail === pendingSignup.email) return msg('error', 'parental', 'Please enter a different email to your own.');
+            if (!document.getElementById('parental-terms').checked) return msg('error', 'parental', 'You must agree to the Terms and Conditions.');
 
             generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
             setBtn('parental-btn', true, 'Sending...');
