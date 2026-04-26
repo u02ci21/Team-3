@@ -229,7 +229,7 @@ MonoBehaviour:
   startPanel: {fileID: 1480297621}
   gameOverPanel: {fileID: 845348783}
   levelCompletePanel: {fileID: 52164546}
-  targetScore: 500
+  targetScore: 20
 --- !u!4 &79080010
 Transform:
   m_ObjectHideFlags: 0
@@ -25586,7 +25586,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 79080009}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ShowLevelComplete
+        m_MethodName: ReturnToMap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -36779,7 +36779,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Finish
 --- !u!222 &2115983032
 CanvasRenderer:
   m_ObjectHideFlags: 0
