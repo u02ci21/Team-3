@@ -119,6 +119,25 @@ public class SoilGameManager : MonoBehaviour
             gameOverText.text = "Well done!";
             timeRemainingText.text = "Time remaining: " + string.Format("{0:00}:{1:00}", minutes, seconds);
             gameOverPanel.SetActive(true);
+
+            ReportCompletionToProgressManager();
+        }
+    }
+
+    private void ReportCompletionToProgressManager()
+    {
+        // Find the progress manager and report completion
+        if (GameProgressManager.Instance != null)
+        {
+            GameProgressManager.Instance.CompleteSoilGame();
+            Debug.Log("Soil game completion reported to GameProgressManager!");
+        }
+        else
+        {
+            // Fallback to PlayerPrefs
+            PlayerPrefs.SetInt("SoilGameCompleted", 1);
+            PlayerPrefs.Save();
+            Debug.Log("Soil game completion saved to PlayerPrefs");
         }
     }
 
@@ -132,9 +151,11 @@ public class SoilGameManager : MonoBehaviour
         SceneManager.LoadScene("MainPage");
     }
 
-    public void LoadMainGame()
+    public void ReturnToMap()
     {
-        SceneManager.LoadScene("harmonygarden");
+        Time.timeScale = 1;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("harmonygarden");
+        // The dialogue will refresh when the scene loads via Start()
     }
 
     public void ResetPlotCompleted(int plotIndex)

@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     public int targetScore = 500;
 
+    private bool hasReportedCompletion = false; // Prevents reporting multiple times
+
     void Awake()
     {
         Instance = this;
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
         startPanel.SetActive(true);
         gameOverPanel.SetActive(false);
         levelCompletePanel.SetActive(false);
+        hasReportedCompletion = false;
     }
 
     public void StartGame()
@@ -46,6 +49,32 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         levelCompletePanel.SetActive(true);
+
+        // REPORT COMPLETION TO PROGRESS MANAGER
+        ReportCompletionToProgressManager();
+    }
+
+    // Report completion to the persistent progress manager
+    private void ReportCompletionToProgressManager()
+    {
+        // Prevent duplicate reports
+        if (hasReportedCompletion) return;
+
+        hasReportedCompletion = true;
+
+        // Find the progress manager (it persists across scenes)
+        if (GameProgressManager.Instance != null)
+        {
+            GameProgressManager.Instance.CompleteStreamGame();
+            Debug.Log("Stream game completion reported to GameProgressManager!");
+        }
+        else
+        {
+            // Fallback: Use PlayerPrefs if GameProgressManager doesn't exist
+            PlayerPrefs.SetInt("StreamGameCompleted", 1);
+            PlayerPrefs.Save();
+            Debug.Log("Stream game completion saved to PlayerPrefs");
+        }
     }
 
     public void RestartGame()
@@ -53,5 +82,13 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         UnityEngine.SceneManagement.SceneManager.LoadScene(
             UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
+
+    // Return to map scene with completion status
+    public void ReturnToMap()
+    {
+        Time.timeScale = 1;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("harmonygarden");
+        // The dialogue will refresh when the scene loads via Start()
     }
 }
