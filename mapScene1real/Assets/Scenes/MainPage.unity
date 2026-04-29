@@ -1645,7 +1645,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 255550361}
         m_TargetAssemblyTypeName: GameSceneManagerSoil, Assembly-CSharp
-        m_MethodName: LoadLevelSelect
+        m_MethodName: LoadMainGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

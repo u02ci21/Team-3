@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/harmonygarden.unity
+    path: Assets/Scenes/harmonygarden.unity
     guid: de396ded85bd38049ac4e25929c62aed
   - enabled: 1
     path: Assets/Scenes/streamgame.unity
