@@ -2583,6 +2583,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1214845716}
   - component: {fileID: 1214845717}
+  - component: {fileID: 1214845718}
   m_Layer: 5
   m_Name: GameSceneManager
   m_TagString: Untagged
@@ -2621,8 +2622,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2b2d6d7f2e365458242cdfc092c1b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameSceneManager
+--- !u!114 &1214845718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214845715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f5da1b1ee23c54c96b1ca5213aef1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameSceneManager
+  mainPageSceneName: MainPage
   mainGameSceneName: harmonygarden
   streamGameSceneName: streamgame
+  soilGameSceneName: SoilPlantingScene
+  settingsSceneName: SettingScene
+  levelSelectSceneName: SC All Props
   loadingScreenPanel: {fileID: 0}
   progressSlider: {fileID: 0}
   statusText: {fileID: 0}
@@ -4359,7 +4376,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1214845717}
+      - m_Target: {fileID: 1214845718}
         m_TargetAssemblyTypeName: GameSceneManager, Assembly-CSharp
         m_MethodName: LoadMainPage
         m_Mode: 1

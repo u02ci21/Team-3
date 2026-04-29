@@ -9,8 +9,12 @@ public class GameSceneManager : MonoBehaviour
     public static GameSceneManager Instance { get; private set; }
 
     [Header("Scene Names")]
+    [SerializeField] private string mainPageSceneName = "MainPage";
     [SerializeField] private string mainGameSceneName = "harmonygarden";
     [SerializeField] private string streamGameSceneName = "streamgame";
+    [SerializeField] private string soilGameSceneName = "SoilPlantingScene";
+    [SerializeField] private string settingsSceneName = "SettingScene";
+    [SerializeField] private string levelSelectSceneName = "SC All Props";
 
     [Header("Loading Screen")]
     [SerializeField] private GameObject loadingScreenPanel;
@@ -22,6 +26,7 @@ public class GameSceneManager : MonoBehaviour
 
     void Awake()
     {
+        // Singleton pattern
         if (Instance == null)
         {
             Instance = this;
@@ -36,14 +41,16 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
-    public void LoadStreamGame()
+    // ===== SCENE LOADING METHODS =====
+
+    public void LoadMainPage()
     {
         if (isLoading)
         {
             Debug.Log("Already loading a scene, ignoring request");
             return;
         }
-        StartCoroutine(LoadSceneAsync(streamGameSceneName));
+        StartCoroutine(LoadSceneAsync(mainPageSceneName));
     }
 
     public void LoadMainGame()
@@ -55,6 +62,60 @@ public class GameSceneManager : MonoBehaviour
         }
         StartCoroutine(LoadSceneAsync(mainGameSceneName));
     }
+
+    public void LoadStreamGame()
+    {
+        if (isLoading)
+        {
+            Debug.Log("Already loading a scene, ignoring request");
+            return;
+        }
+        StartCoroutine(LoadSceneAsync(streamGameSceneName));
+    }
+
+    public void LoadSoilGame()
+    {
+        if (isLoading)
+        {
+            Debug.Log("Already loading a scene, ignoring request");
+            return;
+        }
+        StartCoroutine(LoadSceneAsync(soilGameSceneName));
+    }
+
+    public void LoadSettingsScene()
+    {
+        if (isLoading)
+        {
+            Debug.Log("Already loading a scene, ignoring request");
+            return;
+        }
+        StartCoroutine(LoadSceneAsync(settingsSceneName));
+    }
+
+    public void LoadLevelSelect()
+    {
+        if (isLoading)
+        {
+            Debug.Log("Already loading a scene, ignoring request");
+            return;
+        }
+        StartCoroutine(LoadSceneAsync(levelSelectSceneName));
+    }
+
+    // ===== ACCOUNT & SETTINGS METHODS =====
+
+    public void OnLogoutPressed()
+    {
+        Application.OpenURL("https://team3charlie1.netlify.app/logout.html");
+    }
+
+    public void OnDeleteAccountPressed()
+    {
+        Application.OpenURL("https://team3charlie1.netlify.app/delete.html");
+    }
+
+    // ===== ASYNC SCENE LOADING COROUTINE =====
 
     IEnumerator LoadSceneAsync(string sceneName)
     {
@@ -76,27 +137,25 @@ public class GameSceneManager : MonoBehaviour
             loadingScreenPanel.SetActive(true);
         }
 
-        // Reset UI
+        // Reset UI elements
         if (progressSlider != null)
             progressSlider.value = 0;
-        if (percentageText != null)
-            percentageText.text = "0%";
         if (statusText != null)
             statusText.text = "Loading...";
+        if (percentageText != null)
+            percentageText.text = "0%";
 
-        // Start loading
+        // Start loading the scene - let it activate naturally
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-
-        // IMPORTANT: Allow it to activate automatically
-        asyncLoad.allowSceneActivation = true;
+        asyncLoad.allowSceneActivation = true; // Allow immediate activation
 
         // Update progress while loading
         while (!asyncLoad.isDone)
         {
-            // Progress goes from 0 to 0.9 for loading, then 1.0 when activated
             float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
             int percent = Mathf.RoundToInt(progress * 100);
 
+            // Update UI
             if (progressSlider != null)
                 progressSlider.value = progress;
             if (percentageText != null)
@@ -105,30 +164,13 @@ public class GameSceneManager : MonoBehaviour
             yield return null;
         }
 
-        // Scene is now fully loaded and active
-        Debug.Log($"Scene {sceneName} fully loaded");
-
         // Hide loading screen
         if (loadingScreenPanel != null)
         {
             loadingScreenPanel.SetActive(false);
         }
 
+        Debug.Log($"Scene {sceneName} fully loaded and activated");
         isLoading = false;
-    }
-
-    public void LoadMainPage()
-    {
-        StartCoroutine(LoadSceneAsync("MainPage"));
-    }
-
-    public void LoadSettingsScene()
-    {
-        StartCoroutine(LoadSceneAsync("SettingScene"));
-    }
-
-    public void LoadSoilGame()
-    {
-        StartCoroutine(LoadSceneAsync("SoilPlantingScene"));
     }
 }
