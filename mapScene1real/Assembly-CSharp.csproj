@@ -118,7 +118,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Scripts\SoilScripts\SoilGameManager.cs" />
     <Compile Include="Assets\Scripts\SoilScripts\TillingTool.cs" />
-    <Compile Include="Assets\Scripts\GeneralScripts\GameSceneManagerSoil.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\Scripts\StreamScripts\FollowObject.cs" />

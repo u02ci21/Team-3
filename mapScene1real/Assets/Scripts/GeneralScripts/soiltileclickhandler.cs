@@ -34,7 +34,7 @@ public class soilTileClickHandler : MonoBehaviour
         // Use the static Instance directly 
         if (GameSceneManager.Instance == null)
         {
-            Debug.LogError("GameSceneManagerSoil.Instance is NULL! Make sure GameSceneManagerSoil exists in the scene.");
+            Debug.LogError("GameSceneManager.Instance is NULL! Make sure GameSceneManager exists in the scene.");
             return;
         }
 
