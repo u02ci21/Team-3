@@ -5912,7 +5912,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5616762335469606972, guid: b1c4a0cc85eefce479bf31b0d00cc498, type: 3}
+  m_Sprite: {fileID: 6993249856125824018, guid: d19494cb30ca56a4f9fa48324dd0e669, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11109,6 +11109,8 @@ MonoBehaviour:
   afterSoilDialogue:
   - 'Congratulations! You have planted all the seeds and the garden looks lively
     now. '
+  typingSpeed: 0.05
+  enableTypewriter: 1
   dialogueText: {fileID: 937662773}
   continueButton: {fileID: 1736012239}
   dialogueBox: {fileID: 731905795}
