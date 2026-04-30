@@ -27,15 +27,8 @@ public class DialogueSystem : MonoBehaviour
     void Start()
     {
         Debug.Log("DialogueSystem Start() called");
-
-        if (continueButton == null)
-        {
-            continueButton = GetComponentInChildren<Button>();
-            if (continueButton == null)
-            {
-                continueButton = FindObjectOfType<Button>();
-            }
-        }
+   
+  
 
         StartCoroutine(InitializeAfterDelay());
     }

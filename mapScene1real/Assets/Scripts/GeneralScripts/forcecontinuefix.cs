@@ -10,8 +10,6 @@ public class ForceButtonFix : MonoBehaviour
     {
         dialogueSystem = GetComponent<DialogueSystem>();
 
-        // Force find the button
-        button = FindObjectOfType<Button>();
 
         if (button != null && dialogueSystem != null)
         {
