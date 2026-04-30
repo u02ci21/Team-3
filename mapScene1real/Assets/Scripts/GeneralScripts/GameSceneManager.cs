@@ -1,8 +1,9 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
-using System.Collections;
 
 public class GameSceneManager : MonoBehaviour
 {
@@ -121,6 +122,8 @@ public class GameSceneManager : MonoBehaviour
     {
         isLoading = true;
 
+        Time.timeScale = 1f;
+
         // Don't load the scene we're already in
         if (SceneManager.GetActiveScene().name == sceneName)
         {
@@ -130,6 +133,7 @@ public class GameSceneManager : MonoBehaviour
         }
 
         Debug.Log($"Starting to load scene: {sceneName}");
+
 
         // Show loading screen
         if (loadingScreenPanel != null)
@@ -164,6 +168,7 @@ public class GameSceneManager : MonoBehaviour
             yield return null;
         }
 
+
         // Hide loading screen
         if (loadingScreenPanel != null)
         {
@@ -173,4 +178,5 @@ public class GameSceneManager : MonoBehaviour
         Debug.Log($"Scene {sceneName} fully loaded and activated");
         isLoading = false;
     }
+
 }
