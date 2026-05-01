@@ -71,7 +71,7 @@
                             ? 'That verification link has expired. Please sign up again or request a new link.'
                             : 'Something went wrong: ' + (errorDesc || errorCode).replace(/\+/g, ' ')}
                     </div>
-                    <a href="https://team3charlie1.netlify.app/index.html">Back to Login</a>
+                    <a href="https://team3charlie.netlify.app/index.html">Back to Login</a>
                 `;
                 return;
             }
@@ -83,13 +83,13 @@
                 content.innerHTML = `
                     <h1>Email Verified!</h1>
                     <p>Your account is all set. Head back to the login page to start playing.</p>
-                    <a href="https://team3charlie1.netlify.app/index.html">Go to Login</a>
+                    <a href="https://team3charlie.netlify.app/index.html">Go to Login</a>
                 `;
             } else {
                 content.innerHTML = `
                     <h1>Email Verified!</h1>
                     <p>Your account has been confirmed. Go back to the login page to sign in.</p>
-                    <a href="https://team3charlie1.netlify.app/index.html">Go to Login</a>
+                    <a href="https://team3charlie.netlify.app/index.html">Go to Login</a>
                 `;
             }
         });
