@@ -22,12 +22,12 @@ public class SoilGameManager : MonoBehaviour
     [Header("Facts")]
     private string[] facts = new string[]
     {
-        "placeholder fact",
-        "placeholder fact",
-        "placeholder fact",
-        "placeholder fact",
-        "placeholder fact",
-        "placeholder fact",
+        "Seeds contain everything a plant needs to grow - water, sunlight and soil just help wake them up!",
+        "Plants help fight climate change by absorbing carbon dioxide from the air as they grow.",
+        "Soil needs air, water, and nutrients to help plants grow strong roots.",
+        "Crop rotation means planting different crops each season so soil doesn't get tired and worn out.",
+        "Biodiversity in soil makes plants stronger and more resistant to disease.",
+        "Organic farming doesn't use harmful chemicals, so the soil stays healthy for growing food for years.",
     };
 
     private int currentPlotIndex = 0;

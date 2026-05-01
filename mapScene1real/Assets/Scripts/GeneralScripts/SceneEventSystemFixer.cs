@@ -13,11 +13,16 @@ public class SceneEventSystemFixer : MonoBehaviour
             Debug.Log($"EventSystem '{es.name}' enabled in scene {gameObject.scene.name}");
         }
 
+
+        /*  This was causing the items to spawn before pressing play, removed for now.
+
         // Also ensure time scale is normal
-        if (Time.timeScale == 0)
+         if (Time.timeScale == 0)
         {
             Time.timeScale = 1;
             Debug.Log("Time.timeScale was 0, reset to 1");
-        }
+        } 
+
+        */
     }
 }

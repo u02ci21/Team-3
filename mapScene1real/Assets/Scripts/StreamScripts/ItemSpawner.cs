@@ -8,6 +8,14 @@ public class ItemSpawner : MonoBehaviour
 
     void Update()
     {
+
+        // checks if game is paused
+        if (Time.timeScale == 0)
+        {
+            Debug.Log("ItemSpawner: Game paused, not spawning");
+            return;
+        }
+
         timer += Time.deltaTime;
         if (timer >= spawnInterval)
         {
