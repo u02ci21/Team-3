@@ -48,3 +48,5 @@ Adding a new setting:
 1. Add a toggle or slider to the SettingScene canvas
 2. Create a script following the pattern of TimerToggle or DyslexicFontToggle, saving the preference to PlayerPrefs
 3. Read the PlayerPrefs key in any scene that needs to respond to the setting
+
+Common Issues:
