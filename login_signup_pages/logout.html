@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logging out...</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <p>Logging out...</p>
+    <script>
+        const sb = window.supabase.createClient(
+            'https://oynhlpajwzsjqknxcnxa.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95bmhscGFqd3pzanFrbnhjbnhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5OTg4NTMsImV4cCI6MjA5MTU3NDg1M30.SAlaBAgVkpDGQQJLZ9kCw27P-FxuGZDKUkmf_yPYJGo'
+        );
+
+        sb.auth.signOut().then(() => {
+            window.location.href = 'https://team3charlie1.netlify.app/index.html';
+        });
+    </script>
+</body>
+</html>
