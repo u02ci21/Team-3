@@ -12,6 +12,11 @@ public class Timer : MonoBehaviour
     void Start()
     {
         timeRemaining = timeLimit;
+        bool timerEnabled = PlayerPrefs.GetInt("TimerEnabled", 1) == 1;
+        if (!timerEnabled)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     void Update()

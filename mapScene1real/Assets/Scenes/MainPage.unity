@@ -349,6 +349,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2b2d6d7f2e365458242cdfc092c1b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameSceneManager
+  mainPageSceneName: MainPage
+  mainGameSceneName: harmonygarden
+  streamGameSceneName: streamgame
+  soilGameSceneName: SoilPlantingScene
+  settingsSceneName: SettingScene
+  levelSelectSceneName: SC All Props
+  loadingScreenPanel: {fileID: 0}
+  progressSlider: {fileID: 0}
+  statusText: {fileID: 0}
+  percentageText: {fileID: 0}
 --- !u!114 &255550362
 MonoBehaviour:
   m_ObjectHideFlags: 0
