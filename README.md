@@ -49,4 +49,5 @@ Adding a new setting:
 2. Create a script following the pattern of TimerToggle or DyslexicFontToggle, saving the preference to PlayerPrefs
 3. Read the PlayerPrefs key in any scene that needs to respond to the setting
 
-Common Issues:
+# Common Issues:
+There is sometimes issues with duplicate EventSystems after creating and loading into new scenes. Make sure when testing the game is always started in the MainPage scene, and that there is only the "PersistentEventSystem" in the hierarchy. If there are any others, delete them.
