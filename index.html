@@ -5,7 +5,30 @@
     <title>The Sustainables</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        body { font-family: sans-serif; max-width: 400px; margin: 60px auto; padding: 20px; }
+        body { 
+            font-family: sans-serif; 
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background-image: url('backgroundHomepage.jpg'); /* replace background.png with your image filename */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #fff; /* fallback if image doesn't load */
+        }
+
+        .card {
+            background: white;
+            max-width: 400px;
+            width: 100%;
+            margin-top: 60px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+        }
         h1 { text-align: center; margin-bottom: 20px; }
         .tabs { display: flex; margin-bottom: 20px; }
         .tab { flex: 1; padding: 10px; background: #eee; border: 1px solid #ccc; cursor: pointer; }
@@ -22,6 +45,7 @@
     </style>
 </head>
 <body>
+    <div class="card">
     <h1>The Sustainables</h1>
 
     <div class="tabs">
@@ -85,7 +109,7 @@
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95bmhscGFqd3pzanFrbnhjbnhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5OTg4NTMsImV4cCI6MjA5MTU3NDg1M30.SAlaBAgVkpDGQQJLZ9kCw27P-FxuGZDKUkmf_yPYJGo'
         );
 
-        const GAME_PAGE = 'game.html';
+        const GAME_PAGE = 'webglfinal/index.html';
         const VERIFY_URL = 'https://team3charlie.netlify.app/verify.html';
         const RESET_URL  = 'https://team3charlie.netlify.app/reset-password.html';
 
@@ -260,5 +284,6 @@
             if (session) window.location.href = GAME_PAGE;
         });
     </script>
+    </div>
 </body>
 </html>
