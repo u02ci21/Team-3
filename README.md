@@ -53,4 +53,4 @@ Adding a new setting:
 There is sometimes issues with duplicate EventSystems after creating and loading into new scenes. Make sure when testing the game is always started in the MainPage scene, and that there is only the "PersistentEventSystem" in the hierarchy. If there are any others, delete them.
 
 # User Manual
-## Getting Started
+### Getting Started
