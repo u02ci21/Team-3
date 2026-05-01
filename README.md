@@ -54,3 +54,41 @@ There is sometimes issues with duplicate EventSystems after creating and loading
 
 # User Manual
 ### Getting Started
+1. Visit team3charlie.netlify.app
+2. Click "Sign Up" and enter a username, email, password (6+ characters), and date of birth
+3. Check email for a verification link and click it
+4. If under 13, a parent must click the consent link sent to their email
+5. Log in with your email and password
+
+### Home Page
+- Click "Play" to start
+- Click "Settings" to adjust preferences
+- Click "Log Out" to end your session
+
+### Settings
+- Dyslexic font: switches all text to a dyslexia friendly font
+- No minigame timers: removes the countdown from the soil planting game
+- Volume sliders: adjust sound effects and music
+- Delete account: permanently removes your account and all data
+
+### Level Selector
+- Level 1 is available to play
+- Level 2 shows "Coming Soon"
+
+### Level one - Harmony's Garden
+- A character appears with dialogue, click "Continue" to advance the text
+- Click the stream to start the stream cleaning minigame
+- After completing the stream game, click the soil to start the soil planting minigame
+
+### Stream Cleaning Minigame
+- Drag waste items into the correct bins: recycling, general waste, and gold coins
+- Score 500 points to complete the game
+- Wrong bin or missed item lose 1 heart out of 3 total
+- Lose all hearts and you must restart
+
+### Soil Planting Minigame
+- Plant seeds in the correct order as indicated
+- Water each seed after planting
+- Watch moisture levels, seeds will dry out over time
+- Re-water dry seeds before they wilt
+- Complete all planting before time runs out (timer can be disabled in settings)
