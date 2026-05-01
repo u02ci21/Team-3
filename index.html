@@ -55,7 +55,7 @@
 
         <div id="parental-consent" style="display:none;">
             <p style="margin-bottom:12px;">You need a parent or guardian to sign up for you as you are under 13.</p>
-            <p style="margin-bottom:16px;">Please ask them to enter their email below and we will send them a verification code.</p>
+            <p style="margin-bottom:16px;">Please ask them to enter their email below. We will send them a verification link to confirm your account.</p>
             <div id="parental-message" class="message"></div>
             <form id="parental-form" novalidate>
                 <label>Parent or Guardian Email <input type="email" id="parent-email"></label>
@@ -63,17 +63,9 @@
                     <input type="checkbox" id="parental-terms" style="width:auto; margin-right:6px;">
                     I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a> on behalf of my child
                 </label>
-                <button type="submit" id="parental-btn">Send Verification Code</button>
+                <button type="submit" id="parental-btn">Send Verification Link</button>
                 <button type="button" class="link-button" onclick="showSignupForm()">Back</button>
             </form>
-            <div id="verify-code-section" style="display:none; margin-top:16px;">
-                <div id="verify-message" class="message"></div>
-                <p style="margin-bottom:12px;">Enter the 6 digit code sent to your parent or guardian's email.</p>
-                <form id="verify-code-form" novalidate>
-                    <label>Verification Code <input type="text" id="verify-code" maxlength="6" placeholder="000000"></label>
-                    <button type="submit" id="verify-btn">Verify</button>
-                </form>
-            </div>
         </div>
     </div>
 
@@ -98,7 +90,6 @@
         const RESET_URL  = 'https://team3charlie.netlify.app/reset-password.html';
 
         let pendingSignup = null;
-        let generatedCode = null;
 
         // ---- HELPERS ----
 
@@ -196,43 +187,22 @@
             e.preventDefault();
             const parentEmail = document.getElementById('parent-email').value.trim();
 
-            if (!isValidEmail(parentEmail))        return msg('error', 'parental', 'Please enter your email address as the parent/guardian.');
-            if (parentEmail === pendingSignup.email) return msg('error', 'parental', 'Please enter a different email to your own.');
+            if (!isValidEmail(parentEmail))          return msg('error', 'parental', 'Please enter a valid email address.');
+            if (parentEmail === pendingSignup.email)  return msg('error', 'parental', 'Please enter a different email to your own.');
             if (!document.getElementById('parental-terms').checked) return msg('error', 'parental', 'You must agree to the Terms and Conditions.');
 
-            generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
             setBtn('parental-btn', true, 'Sending...');
-
             try {
-                await sb.functions.invoke('send-parent-code', {
-                    body: { parentEmail, code: generatedCode, childUsername: pendingSignup.username }
-                });
-            } catch (_) {}
-
-            document.getElementById('parental-form').style.display = 'none';
-            document.getElementById('verify-code-section').style.display = 'block';
-            msg('success', 'verify', 'Code sent. Please enter it below.');
-            setBtn('parental-btn', false, 'Send Verification Code');
-        });
-
-        document.getElementById('verify-code-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const entered = document.getElementById('verify-code').value.trim();
-
-            if (entered !== generatedCode) return msg('error', 'verify', 'That code is incorrect. Please try again.');
-
-            setBtn('verify-btn', true, 'Verifying...');
-            try {
-                const { data, error } = await createAccount(pendingSignup.email, pendingSignup.password, pendingSignup.username);
+                // Sign up using the parent's email — Supabase sends the verification link to them
+                const { data, error } = await createAccount(parentEmail, pendingSignup.password, pendingSignup.username);
                 if (error) throw error;
-                if (data.user?.identities?.length === 0) return msg('error', 'verify', 'That email is already registered.');
-                msg('success', 'verify', 'Account created! Check the email for a verification link.');
+                if (data.user?.identities?.length === 0) return msg('error', 'parental', 'That email is already registered.');
+                msg('success', 'parental', 'Verification link sent to your parent or guardian. They need to click it to confirm the account.');
                 pendingSignup = null;
-                generatedCode = null;
             } catch (e) {
-                msg('error', 'verify', e.message || 'Something went wrong.');
+                msg('error', 'parental', e.message || 'Something went wrong. Please try again.');
             } finally {
-                setBtn('verify-btn', false, 'Verify');
+                setBtn('parental-btn', false, 'Send Verification Link');
             }
         });
 
